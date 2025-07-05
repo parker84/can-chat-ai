@@ -1,0 +1,14 @@
+[project]
+name = "can-chat-ai"
+version = "0.1.0"
+description = "Canadian AI Chatbot"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "streamlit>=1.35.0",
+    "agno>=1.7.1",
+    "cohere>=5.15.0",
+    "duckduckgo-search>=8.0.5",
+    "sqlalchemy>=2.0.41",
+    "aiofiles>=24.1.0"
+]
