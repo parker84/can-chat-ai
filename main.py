@@ -31,7 +31,7 @@ for message in st.session_state.messages:
 
 # Chat input
 if prompt := st.chat_input(
-        placeholder="How can I help you today?"
+        placeholder="Help me find a gift for my father"
     ):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})

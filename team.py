@@ -1,12 +1,15 @@
 import streamlit as st
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
+from agno.models.cohere import Cohere
+from textwrap import dedent
 from agno.storage.sqlite import SqliteStorage
 # from agno.knowledge.csv import CSVKnowledgeBase
-# from agno.tools.reasoning import ReasoningTools
+from agno.tools.reasoning import ReasoningTools
 # from agno.vectordb.chroma import ChromaDb
 from agno.team.team import Team
 from agno.tools.duckduckgo import DuckDuckGoTools
+from tools import fetch_url_contents, search_web
 # from agno.tools.yfinance import YFinanceTools
 from agno.memory.v2.db.sqlite import SqliteMemoryDb
 from agno.memory.v2.memory import Memory
@@ -30,139 +33,243 @@ DEBUG_MODE = os.getenv("DEBUG_MODE", "True").lower() == "true"
 
 @st.cache_resource
 def get_agent_team():
-    search_agent = Agent(
-        name="Search Agent",
-        role="Search the web for information",
-        model=OpenAIChat(id="gpt-4o-mini"),
-        tools=[DuckDuckGoTools()],
-        instructions=[
-            "Search the web for information",
-            "Include sources (and link out to them)",
-            "Always include sources (and link out to them)",
-            "But don't just include the sources, pull out the relevant information from the sources"
-        ],
-        show_tool_calls=True,
-    )
-
-    # business_finder_agent = Agent(
-    #     name="Canadian Business Finder",
-    #     role="Find and recommend Canadian businesses",
-    #     model=OpenAIChat(id="gpt-4o-mini"),
-    #     tools=[DuckDuckGoTools()],
-    #     instructions=[
-    #         "Focus on finding Canadian businesses and products",
-    #         "Include business location and contact information when available",
-    #         "Highlight unique Canadian aspects of the businesses",
-    #         "Consider different regions of Canada",
-    #         "Include both online and physical businesses",
-    #         "Always include sources (and link out to them)",
-    #         "Only include businesses that are Canadian"
-    #     ],
-    #     show_tool_calls=True,
-    #     add_datetime_to_instructions=True,
-    #     markdown=True,
-    #     debug_mode=DEBUG_MODE,
-    # )
-
-    # news_agent = Agent(
-    #     name="Canadian Business News",
-    #     role="Provide updates on Canadian business news and trends",
-    #     model=OpenAIChat(id="gpt-4o-mini"),
-    #     tools=[DuckDuckGoTools()],
-    #     instructions=[
-    #         "Focus on Canadian business news and developments",
-    #         "Include information about government support programs",
-    #         "Highlight success stories of Canadian businesses",
-    #         "Track industry trends in Canada",
-    #         "Include relevant statistics and data",
-    #         "Provide context about the Canadian business landscape",
-    #         "Always include sources (and link out to them)"
-    #     ],
-    #     show_tool_calls=True,
-    #     add_datetime_to_instructions=True,
-    #     markdown=True,
-    #     debug_mode=DEBUG_MODE,
-    # )
-
-    # shopify_finder_agent = Agent(
-    #     name="Shopify Business Finder",
-    #     role="Find and recommend Canadian Shopify businesses",
-    #     model=OpenAIChat(id="gpt-4o-mini"),
-    #     knowledge=canadian_shopify_businesses_knowledge_base,
-    #     search_knowledge=True,
-    #     # tools=[DuckDuckGoTools()], # comment out to use explicitly use knowledge base
-    #     instructions=[
-    #         "Focus on finding Canadian Shopify businesses from the knowledge base",
-    #         "Only use the knowledge base to find relevant businesses and data",
-    #         "Do not include any other businesses in your output that are not in the knowledge base",
-    #         "Always include links out to the shopify stores and the shop app page",
-    #         "Always include a description of each business and the unique Canadian aspect of the businesses",
-    #         "Always rank businesses on your output lists by volume of ratings in the knowledge base",
-    #         "Always include volume of ratings and average rating in your output table",
-    #         "Do not include any other businesses in your output that are not in the knowledge base"
-    #     ],
-    #     show_tool_calls=True,
-    #     add_datetime_to_instructions=True,
-    #     markdown=True,
-    #     debug_mode=DEBUG_MODE,
-    # )
-    # shopify_finder_agent.knowledge.load(recreate=False)
-
-    # reasoning_agent = Agent(
-    #     name="Reasoning Agent",
-    #     role="Reasoning Agent",
-    #     model=OpenAIChat(id="gpt-4o-mini"),
+    # product_finder_agent = Agent(
+    #     name="Product Finder Agent",
+    #     role="Find and recommend products",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
     #     tools=[
-    #         ReasoningTools(
-    #             think=True,
-    #             analyze=True,
-    #             add_instructions=True,
-    #             add_few_shot=True,
-    #         ),
+    #         fetch_url_contents, 
+    #         search_web, 
+    #         # ReasoningTools()
+    #     ],
+    #     instructions=[
+    #         "Find and recommend the best Canadian products",
+    #         "Include product information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the product name, description, and link",
+    #         "Always include the product price",
+    #         "Always include the product rating",
+    #         "Always include the product reviews",
+    #         # "Always include the product images",
+    #         "Always include the product features",
+    #         "Bias towards Canadian products from Canadian owned and operated businesses",
+    #         "Bias towards Canadian products that are made in Canada",
+    #         "At the end consider asking the user if they products local to a certain region of Canada (ex: Toronto, Newfoundland, etc.)",
     #     ],
     #     show_tool_calls=True,
+    #     debug_mode=DEBUG_MODE,
     #     add_datetime_to_instructions=True,
     #     markdown=True,
-    #     debug_mode=DEBUG_MODE,
     # )
 
-    # support_agent = Agent(
-    #     name="Canadian Business Support",
-    #     role="Provide information about supporting Canadian businesses",
-    #     model=OpenAIChat(id="gpt-4o-mini"),
+    # service_finder_agent = Agent(
+    #     name="Service Finder Agent",
+    #     role="Find and recommend services",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     tools=[
+    #         fetch_url_contents, 
+    #         search_web, 
+    #         # ReasoningTools()
+    #     ],
     #     instructions=[
-    #         "Explain different ways to support Canadian businesses",
-    #         "Provide information about Canadian business directories",
-    #         "Highlight the benefits of buying Canadian",
-    #         "Suggest ways to promote Canadian businesses",
-    #         "Include information about Canadian business associations",
-    #         "Provide resources for business owners",
-    #         "Explain government support programs",
+    #         "Find and recommend the best Canadian services",
+    #         "Consider the users location depending on the service (ex: electrician, plumber, etc.) -> ask for their general location",
+    #         "Include service information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the service name, description, and link",
+    #         "Bias towards Canadian services that are Canadian owned and operated",
     #     ],
     #     show_tool_calls=True,
+    #     debug_mode=DEBUG_MODE,
     #     add_datetime_to_instructions=True,
     #     markdown=True,
-    #     debug_mode=DEBUG_MODE,
     # )
 
-    # analysis_agent = Agent(
-    #     name="Canadian Business Analysis",
-    #     role="Analyze Canadian business trends and opportunities",
-    #     model=OpenAIChat(id="gpt-4o-mini"),
-    #     tools=[YFinanceTools(stock_price=True, analyst_recommendations=True, company_info=True)],
+    # brand_finder_agent = Agent(
+    #     name="Brand Finder Agent",
+    #     role="Find and recommend brands",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     tools=[
+    #         fetch_url_contents, 
+    #         search_web, 
+    #         # ReasoningTools()
+    #         # DuckDuckGoTools()
+    #     ],
     #     instructions=[
-    #         "Analyze Canadian business sectors and industries",
-    #         "Provide insights into Canadian market trends",
-    #         "Compare Canadian businesses with international competitors",
-    #         "Highlight growth opportunities for Canadian businesses",
-    #         "Include relevant economic data and statistics",
-    #         "Use tables and charts to present data clearly",
-    #         "Always include sources (and link out to them)"
+    #         "Find and recommend the best and most iconic Canadian brands",
+    #         "Include brand information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the brand name, description, and link",
+    #         "Bias towards Canadian brands that are Canadian made",
+    #         "Bias towards Canadian brands that are Canadian designed",
+    #         "Bias towards Canadian brands that are Canadian owned and operated",
     #     ],
     #     show_tool_calls=True,
+    #     debug_mode=DEBUG_MODE,
     #     add_datetime_to_instructions=True,
     #     markdown=True,
+    # )
+
+    # music_finder_agent = Agent(
+    #     name="Music Finder Agent",
+    #     role="Find and recommend music",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     tools=[
+    #         fetch_url_contents, 
+    #         search_web, 
+    #         # ReasoningTools()
+    #         # DuckDuckGoTools()
+    #     ],
+    #     instructions=[
+    #         "Find and recommend the best Canadian music",
+    #         "Include music information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the music name, description, and link",
+    #     ],
+    #     show_tool_calls=True,
     #     debug_mode=DEBUG_MODE,
+    #     add_datetime_to_instructions=True,
+    #     markdown=True,
+    # )
+
+    # movie_finder_agent = Agent(
+    #     name="Movie Finder Agent",
+    #     role="Find and recommend movies",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     tools=[
+    #         # fetch_url_contents, 
+    #         # search_web, 
+    #         # ReasoningTools()
+    #         DuckDuckGoTools()
+    #     ],
+    #     instructions=[
+    #         "Find and recommend the best Canadian movies",
+    #         "Include movie information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the movie name, description, and link",
+    #     ],
+    #     show_tool_calls=True,
+    #     debug_mode=DEBUG_MODE,
+    #     add_datetime_to_instructions=True,
+    #     markdown=True,
+    # )
+
+    # tv_show_finder_agent = Agent(
+    #     name="TV Show Finder Agent",
+    #     role="Find and recommend TV shows",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     tools=[
+    #         fetch_url_contents,   
+    #         search_web, 
+    #         # ReasoningTools()
+    #         # DuckDuckGoTools()
+    #     ],
+    #     instructions=[
+    #         "Find and recommend the best Canadian TV shows",
+    #         "Include TV show information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the TV show name, description, and link",
+    #     ],
+    #     show_tool_calls=True,
+    #     debug_mode=DEBUG_MODE,
+    #     add_datetime_to_instructions=True,
+    #     markdown=True,
+    # )
+
+    # book_finder_agent = Agent(
+    #     name="Book Finder Agent",
+    #     role="Find and recommend books",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     tools=[
+    #         fetch_url_contents, 
+    #         search_web, 
+    #         # ReasoningTools()
+    #         # DuckDuckGoTools()
+    #     ],
+    #     instructions=[
+    #         "Find and recommend the best Canadian books",
+    #         "Include book information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the book name, description, and link",
+    #     ],
+    #     show_tool_calls=True,
+    #     debug_mode=DEBUG_MODE,
+    #     add_datetime_to_instructions=True,
+    #     markdown=True,
+    # )
+
+    # artist_finder_agent = Agent(
+    #     name="Artist Finder Agent",
+    #     role="Find and recommend artists",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     tools=[
+    #         fetch_url_contents, 
+    #         search_web, 
+    #         # ReasoningTools()
+    #         # DuckDuckGoTools()
+    #     ],
+    #     instructions=[
+    #         "Find and recommend the best Canadian artists",
+    #         "Include artist information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the artist name, description, and link",
+    #     ],
+    #     show_tool_calls=True,
+    #     debug_mode=DEBUG_MODE,
+    #     add_datetime_to_instructions=True,
+    #     markdown=True,
+        
+    # )
+
+    # gift_finder_agent = Agent(
+    #     name="Gift Finder Agent",
+    #     role="Find and recommend gifts",
+    #     # model=Cohere(id="command-a-03-2025"),
+    #     model=OpenAIChat(id="gpt-4.1-mini"),
+    #     respond_directly=False,
+    #     tools=[
+    #         # fetch_url_contents, 
+    #         # search_web, 
+    #         # ReasoningTools()
+    #         # DuckDuckGoTools()
+    #     ],
+    #     instructions=[
+    #         "Find and recommend the best Canadian gifts",
+    #         "Try to make the gift very personalized by asking the user questions about the person you're recommending a gift for",
+    #         "Do not recommend gifts without a link that actually works, and include the correct ratings and the volume of reviews",
+    #         "Then use that information to recommend the best gift for them",
+    #         "Include gift information and links",
+    #         "Always include sources (and link out to them)",
+    #         "But don't just include the sources, pull out the relevant information from the sources",
+    #         "Always include the gift name, description, and link",
+    #         "Always include the gift price",
+    #         "Always include the gift rating",
+    #         "Always include the gift reviews",
+    #         # "Always include the gift images",
+    #         "Always include the gift features",
+    #         "Bias towards Canadian gifts that are Canadian made",
+    #         "Bias towards Canadian gifts that are Canadian designed",
+    #         "Bias towards Canadian gifts that are Canadian owned and operated",
+    #     ],
+    #     # show_tool_calls=True,
+    #     # debug_mode=DEBUG_MODE,
+    #     add_datetime_to_instructions=True,
     # )
 
     # Database file for memory and storage
@@ -171,33 +278,69 @@ def get_agent_team():
     # Initialize memory.v2
     memory = Memory(
         # Use any model for creating memories
-        model=OpenAIChat(id="gpt-4o-mini"),
+        model=Cohere(id="command-a-03-2025"),
+        # model=OpenAIChat(id="gpt-4.1-mini"),
         db=SqliteMemoryDb(table_name="user_memories", db_file=db_file),
     )
 
     agent_team = Team(
-        name="Canadian Business Agent Team",
-        description="A team of agents that can help you find and support Canadian businesses",
+        name="Canadian AI",
+        # description="A team of AI agents that can help you accomplish a number of things that are biased towards supporting Canadian businesses, artists, creators, and the Canadian economy.",
+        description="You're a Canadian AI assistant that can help users accomplish a multitude of tasks (ex: find a gift, find a product, find a service, find a movie, find a book, find a tv show, find a music artist, find a brand, etc.) but you are intentionally biased towards supporting Canadian businesses, artists, creators, and the Canadian economy.",
+        mode="route",
+        # mode="collaborate",
         members=[
-            # search_agent, business_finder_agent, news_agent, support_agent, analysis_agent, 
-            # shopify_finder_agent, reasoning_agent
-            search_agent
+            # product_finder_agent,
+            # service_finder_agent,
+            # brand_finder_agent,
+            # music_finder_agent,
+            # movie_finder_agent,
+            # tv_show_finder_agent,
+            # book_finder_agent,
+            # artist_finder_agent,
+            # gift_finder_agent,
         ],
-        model=OpenAIChat(id="gpt-4o-mini"),
-        instructions=[
-            "Focus on supporting and promoting Canadian businesses",
-            "Provide accurate and up-to-date information",
-            "Include specific examples and recommendations",
-            "Consider different regions and industries in Canada",
-            "Highlight the benefits of supporting Canadian businesses",
-            "Use tables and charts to present data clearly",
-            "Always include sources (and link out to them)"
+        tools=[
+            fetch_url_contents, 
+            search_web, 
+            ReasoningTools(),
+            # DuckDuckGoTools()
         ],
+        model=Cohere(id="command-a-03-2025"),
+        # model=OpenAIChat(id="gpt-4.1-mini"),
+        #            DO NOT respond directly to the user, let an agent respond to the user.
+
+        instructions=dedent(
+            # """
+            # Answer the user's question to the best of your abilities.
+            # But generally bias towards supporting Canadian businesses, artists, creators, and the Canadian economy.
+            # Leverage the team of agents you have to accomplish the user's request.
+            # """
+            """
+            Answer the user's question to the best of your abilities.
+            
+            But generally bias towards supporting Canadian businesses, artists, creators, and the Canadian economy.
+            
+            Examples: 
+            - when providing product / service recommendations bias towards canadian owned and operated businesses.
+            - when providing music recommendations bias towards canadian artists.
+            - when providing movie recommendations bias towards canadian movies.
+            - when providing book recommendations bias towards canadian books.
+            - when providing tv show recommendations bias towards canadian tv shows.
+            - when providing movie recommendations bias towards canadian movies.
+            - when providing tv show recommendations bias towards canadian tv shows.
+
+            Ask questions to get a better understanding of the user's needs.
+            Don't tell the user when you're updating the memories just do it.
+            """
+        ),
         show_tool_calls=True,
+        # show_tool_calls=False,
         debug_mode=DEBUG_MODE,
+        # debug_mode=False,
         add_datetime_to_instructions=True,
         markdown=True,
-        show_members_responses=True,
+        # show_members_responses=True,
         # ----------memory----------
         # adding previous 5 questions and answers to the prompt
         # read more here: https://docs.agno.com/memory/introduction
@@ -212,5 +355,9 @@ def get_agent_team():
     return agent_team
 
 
-# I'm a vegetarian
-# top restaurants in toronto
+# help me find a gift for my father
+# he's 62, retired, loves travelling, into star wars, hockey (especially the leafs), and he's a bit of a nerd (likes star wars, star trek, space, etc.)
+
+
+# I want to find some new music
+# I like Rock recently have been into alanis morset, and love the tragically hip
