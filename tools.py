@@ -68,7 +68,7 @@ from urllib.parse import quote
 #                 return response.text
 #     return ""
 
-
+# TODO: make it async
 @tool(
     cache_results=True,                             # Enable caching of results
     cache_dir="/tmp/agno_cache",                    # Custom cache directory

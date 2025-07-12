@@ -1,7 +1,7 @@
 import streamlit as st
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from agno.models.cohere import Cohere
+# from agno.models.cohere import Cohere # TODO: fix this not working now
 from textwrap import dedent
 from agno.storage.sqlite import SqliteStorage
 # from agno.knowledge.csv import CSVKnowledgeBase
@@ -14,6 +14,9 @@ from tools import fetch_url_contents, search_web
 from agno.memory.v2.db.sqlite import SqliteMemoryDb
 from agno.memory.v2.memory import Memory
 import os
+
+# TODO: deal w the massive outputs sometimes - is it not properly leveraging the sources?
+# TODO: is it properly understanding things or just regurgitating the sources?
 
 DEBUG_MODE = os.getenv("DEBUG_MODE", "True").lower() == "true"
 
@@ -31,63 +34,64 @@ DEBUG_MODE = os.getenv("DEBUG_MODE", "True").lower() == "true"
 # TODO: switch over to cohere LLM
 # TODO: let's make it route instead of collaborate
 
+# TODO: bring in the team of agents
 @st.cache_resource
 def get_agent_team():
-    # product_finder_agent = Agent(
-    #     name="Product Finder Agent",
-    #     role="Find and recommend products",
-    #     # model=Cohere(id="command-a-03-2025"),
-    #     model=OpenAIChat(id="gpt-4.1-mini"),
-    #     tools=[
-    #         fetch_url_contents, 
-    #         search_web, 
-    #         # ReasoningTools()
-    #     ],
-    #     instructions=[
-    #         "Find and recommend the best Canadian products",
-    #         "Include product information and links",
-    #         "Always include sources (and link out to them)",
-    #         "But don't just include the sources, pull out the relevant information from the sources",
-    #         "Always include the product name, description, and link",
-    #         "Always include the product price",
-    #         "Always include the product rating",
-    #         "Always include the product reviews",
-    #         # "Always include the product images",
-    #         "Always include the product features",
-    #         "Bias towards Canadian products from Canadian owned and operated businesses",
-    #         "Bias towards Canadian products that are made in Canada",
-    #         "At the end consider asking the user if they products local to a certain region of Canada (ex: Toronto, Newfoundland, etc.)",
-    #     ],
-    #     show_tool_calls=True,
-    #     debug_mode=DEBUG_MODE,
-    #     add_datetime_to_instructions=True,
-    #     markdown=True,
-    # )
+    product_finder_agent = Agent(
+        name="Product Finder Agent",
+        role="Find and recommend products",
+        # model=Cohere(id="command-a-03-2025"),
+        model=OpenAIChat(id="gpt-4.1-mini"),
+        tools=[
+            fetch_url_contents, 
+            search_web, 
+            # ReasoningTools()
+        ],
+        instructions=[
+            "Find and recommend the best Canadian products",
+            "Include product information and links",
+            "Always include sources (and link out to them)",
+            "But don't just include the sources, pull out the relevant information from the sources",
+            "Always include the product name, description, and link",
+            "Always include the product price",
+            "Always include the product rating",
+            "Always include the product reviews",
+            # "Always include the product images",
+            "Always include the product features",
+            "Bias towards Canadian products from Canadian owned and operated businesses",
+            "Bias towards Canadian products that are made in Canada",
+            "At the end consider asking the user if they products local to a certain region of Canada (ex: Toronto, Newfoundland, etc.)",
+        ],
+        show_tool_calls=True,
+        debug_mode=DEBUG_MODE,
+        add_datetime_to_instructions=True,
+        markdown=True,
+    )
 
-    # service_finder_agent = Agent(
-    #     name="Service Finder Agent",
-    #     role="Find and recommend services",
-    #     # model=Cohere(id="command-a-03-2025"),
-    #     model=OpenAIChat(id="gpt-4.1-mini"),
-    #     tools=[
-    #         fetch_url_contents, 
-    #         search_web, 
-    #         # ReasoningTools()
-    #     ],
-    #     instructions=[
-    #         "Find and recommend the best Canadian services",
-    #         "Consider the users location depending on the service (ex: electrician, plumber, etc.) -> ask for their general location",
-    #         "Include service information and links",
-    #         "Always include sources (and link out to them)",
-    #         "But don't just include the sources, pull out the relevant information from the sources",
-    #         "Always include the service name, description, and link",
-    #         "Bias towards Canadian services that are Canadian owned and operated",
-    #     ],
-    #     show_tool_calls=True,
-    #     debug_mode=DEBUG_MODE,
-    #     add_datetime_to_instructions=True,
-    #     markdown=True,
-    # )
+    service_finder_agent = Agent(
+        name="Service Finder Agent",
+        role="Find and recommend services",
+        # model=Cohere(id="command-a-03-2025"),
+        model=OpenAIChat(id="gpt-4.1-mini"),
+        tools=[
+            fetch_url_contents, 
+            search_web, 
+            # ReasoningTools()
+        ],
+        instructions=[
+            "Find and recommend the best Canadian services",
+            "Consider the users location depending on the service (ex: electrician, plumber, etc.) -> ask for their general location",
+            "Include service information and links",
+            "Always include sources (and link out to them)",
+            "But don't just include the sources, pull out the relevant information from the sources",
+            "Always include the service name, description, and link",
+            "Bias towards Canadian services that are Canadian owned and operated",
+        ],
+        show_tool_calls=True,
+        debug_mode=DEBUG_MODE,
+        add_datetime_to_instructions=True,
+        markdown=True,
+    )
 
     # brand_finder_agent = Agent(
     #     name="Brand Finder Agent",
@@ -99,7 +103,7 @@ def get_agent_team():
     #         search_web, 
     #         # ReasoningTools()
     #         # DuckDuckGoTools()
-    #     ],
+#     ],
     #     instructions=[
     #         "Find and recommend the best and most iconic Canadian brands",
     #         "Include brand information and links",
@@ -278,8 +282,8 @@ def get_agent_team():
     # Initialize memory.v2
     memory = Memory(
         # Use any model for creating memories
-        model=Cohere(id="command-a-03-2025"),
-        # model=OpenAIChat(id="gpt-4.1-mini"),
+        # model=Cohere(id="command-a-03-2025"),
+        model=OpenAIChat(id="gpt-4.1-mini"),
         db=SqliteMemoryDb(table_name="user_memories", db_file=db_file),
     )
 
@@ -290,8 +294,8 @@ def get_agent_team():
         mode="route",
         # mode="collaborate",
         members=[
-            # product_finder_agent,
-            # service_finder_agent,
+            product_finder_agent,
+            service_finder_agent,
             # brand_finder_agent,
             # music_finder_agent,
             # movie_finder_agent,
@@ -306,9 +310,31 @@ def get_agent_team():
             ReasoningTools(),
             # DuckDuckGoTools()
         ],
-        model=Cohere(id="command-a-03-2025"),
-        # model=OpenAIChat(id="gpt-4.1-mini"),
+        # model=Cohere(id="command-a-03-2025"),
+        model=OpenAIChat(id="gpt-4.1-mini"), # this does better w yoga pants question
         #            DO NOT respond directly to the user, let an agent respond to the user.
+
+
+            # TODO: make a car finder agent and put this context below into it
+            # If there aren't any Canadian businesses that meet the user's request, 
+            # then look for businesses that are still making the product or service in Canada.
+
+            # Examples:
+            # - there aren't Canadian car companies, but some cars are made in Canada.
+
+            # If you're not 100% certain about whether something is made in Canada vs what isn't then use the search tools to find out.
+            # When searching though -> just don't search for products available in Canada.
+            # Search for products that are made in Canada.
+
+            # Note: not everything you need to recommend has to be made in Canada.
+            # But they should at least be from Canadian owned and operated businesses if not.
+
+            # Examples:
+            # - Roots is a Canadian brand, but not everything they sell is made in Canada -> but you still recommend this iconic Canadian brand.
+            # - Lululemon is a Canadian brand, but not everything they sell is made in Canada -> but you still recommend this iconic Canadian brand.
+
+        # TODO: fix the lululemon response around yoga pants
+        # TODO: 
 
         instructions=dedent(
             # """
@@ -332,6 +358,22 @@ def get_agent_team():
 
             Ask questions to get a better understanding of the user's needs.
             Don't tell the user when you're updating the memories just do it.
+
+            Before listing a a product / recommendation you need to make sure it's from a Canadian company.
+
+            Be sure not to forget iconic Canadian brands when making your recommendations.
+            Examples:
+            - Roots
+            - Lululemon
+            - Tim Hortons
+            - Canada Goose
+            - Canadian Tire
+            - Shopify
+            - CBC
+            - Aritzia
+            - Joe Fresh	
+
+            Remember you're outputting into markdown, so if you use $ for money you need to escape it with a backslash.
             """
         ),
         show_tool_calls=True,
@@ -339,6 +381,8 @@ def get_agent_team():
         debug_mode=DEBUG_MODE,
         # debug_mode=False,
         add_datetime_to_instructions=True,
+        show_members_responses=False,
+        # show_members_responses=True,
         markdown=True,
         # show_members_responses=True,
         # ----------memory----------
