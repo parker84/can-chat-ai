@@ -330,7 +330,106 @@ Here are some top Canadian and Canadian-loved yoga pants options carefully selec
       Let me know if you want more detail on any model or segment!  
         """),
     },
-    
+    {
+        "question": "Help me find my next binge like schitts creek and kim's convenience",
+        "answer": dedent("""
+      Here are some great Canadian TV shows you might enjoy if you liked "Schitt's Creek" and "Kim's Convenience," both comedies with strong       
+      character-driven stories, warmth, and humor:                                                                                                 
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 1. Kim's Convenience                                                                                                                     
+      - **Description:** A heartwarming comedy about the Kim family, Korean-Canadians running a convenience store in Toronto. The series blends    
+      humor with family dynamics, depicting flawed but lovable characters and exploring immigrant family life and generational conflicts.          
+      - **Where to Watch:** Formerly on Netflix Canada; currently streaming on [CBC Gem (Canadian streaming platform)](https://gem.cbc.ca/).       
+      - **Source:** BuzzFeed highlights _Kim's Convenience_ as a delightfully funny, character-driven Canadian sitcom with heart.                  
+      ([BuzzFeed](https://www.buzzfeed.com/laurengarafano/shows-to-watch-after-schitts-creek))                                                     
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 2. Workin' Moms                                                                                                                          
+      - **Description:** A Canadian comedy about four working mothers balancing careers, motherhood, and personal challenges with both humor and   
+      honesty. It’s praised for realistic, refreshingly imperfect characters.                                                                      
+      - **Where to Watch:** [Netflix](https://www.netflix.com/title/80198136) (availability may vary by region) and [CBC Gem](https://gem.cbc.ca/).
+      - **Source:** TV Guide calls this a sleeper hit with strong Canadian humor, offering a brutal yet funny take on motherhood. ([TV             
+      Guide](https://www.tvguide.com/news/shows-like-schitts-creek-watch-next-netflix-hulu/))                                                      
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 3. Letterkenny                                                                                                                           
+      - **Description:** Set in a small rural community in Ontario, this show humorously portrays the lives and interactions of farmers, hockey    
+      players, and local “skids” with witty and fast-paced dialogue. Known for its unique style and turn of phrase.                                
+      - **Where to Watch:** Hulu (US) and [CBC Gem (Canada)](https://gem.cbc.ca/).                                                                 
+      - **Source:** BuzzFeed notes its small-town setting and comedy similar to _Schitt’s Creek_.                                                  
+      ([BuzzFeed](https://www.buzzfeed.com/laurengarafano/shows-to-watch-after-schitts-creek))                                                     
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 4. Corner Gas                                                                                                                            
+      - **Description:** A classic Canadian sitcom about quirky characters in the small town of Dog River, Saskatchewan. The show is lighthearted, 
+      warm, and respectful of its small-town characters, blending gentle humor with community charm.                                               
+      - **Where to Watch:** Amazon Prime Video (purchase) and [CBC Gem](https://gem.cbc.ca/).                                                      
+      - **Source:** Vulture describes _Corner Gas_ as a refreshing small-town character comedy with quirky humor.                                  
+      ([Vulture](https://www.vulture.com/article/best-canadian-sitcoms-streaming.html))                                                            
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 5. The Amazing Gayl Pile                                                                                                                 
+      - **Description:** A darker, surreal Canadian comedy series about a man struggling to keep afloat his late mother's low-rent home-shopping   
+      channel. The show combines absurd humor with character-driven narrative.                                                                     
+      - **Where to Watch:** [GaylPile.com](http://gaylpile.com) (official website)                                                                 
+      - **Source:** Vulture includes this as one of the best Canadian comedies with a unique tone.                                                 
+      ([Vulture](https://www.vulture.com/article/best-canadian-sitcoms-streaming.html))                                                            
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### Where to watch Canadian shows like Schitt’s Creek and Kim’s Convenience:                                                                 
+                                                                                                                                                   
+      Since many Canadian shows, including _Schitt’s Creek_ and _Kim’s Convenience_, have left Netflix Canada, the best place to stream a wide     
+      range of Canadian TV currently is [CBC Gem](https://gem.cbc.ca/), CBC’s free streaming platform with ads or a paid ad-free option. It houses 
+      several iconic Canadian series and supports Canadian creators directly.                                                                      
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### Additional Recommended Shows:                                                                                                            
+                                                                                                                                                   
+      - **Second Jen** — Follows two Asian-Canadian women navigating personal and cultural challenges. ([Available on                              
+      DailyMotion](https://www.dailymotion.com/))                                                                                                  
+      - **Mr. D** — Comedy about a less-than-qualified high school teacher dealing with students and staff. (Available on Hulu)                    
+      - **Kim's Convenience** and **Schitt’s Creek** themselves are also worth re-watching on CBC Gem.                                             
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### Summary                                                                                                                                  
+                                                                                                                                                   
+      If you loved the character-driven, heartfelt yet funny spirit of _Schitt's Creek_ and _Kim's Convenience_, I strongly recommend checking out:
+                                                                                                                                                   
+      - **Kim’s Convenience** (CBC Gem)                                                                                                            
+      - **Workin’ Moms** (Netflix/CBC Gem)                                                                                                         
+      - **Letterkenny** (Hulu/CBC Gem)                                                                                                             
+      - **Corner Gas** (Amazon/CBC Gem)                                                                                                            
+      - **Second Jen** (DailyMotion)                                                                                                               
+                                                                                                                                                   
+      These shows offer a mix of heartfelt family stories, sharp comedy, and unique Canadian perspectives.                                         
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### Sources                                                                                                                                  
+                                                                                                                                                   
+      - BuzzFeed: [21 Underrated Shows That "Schitt's Creek" Fans Will                                                                             
+      Love](https://www.buzzfeed.com/laurengarafano/shows-to-watch-after-schitts-creek)                                                            
+      - TV Guide: [9 Shows Like Schitt's Creek](https://www.tvguide.com/news/shows-like-schitts-creek-watch-next-netflix-hulu/)                    
+      - The Star: [4 great Canadian TV shows not called ‘Schitt’s                                                                                  
+      Creek’](https://www.thestar.com/entertainment/television/theres-so-much-more-to-canadian-tv-than-schitts-creek-here-are-four-great-shows/arti
+      cle_8c674881-4b54-43a7-8602-94658dccffa8.html)                                                                                               
+      - Vulture: [25 Best Canadian Sitcoms to Stream](https://www.vulture.com/article/best-canadian-sitcoms-streaming.html)                        
+      - CBC Gem Streaming Platform: https://gem.cbc.ca/                                                                                            
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      Enjoy exploring these great Canadian TV shows that celebrate the diversity and humor of Canadian life!    
+        """),
+    }
 ]
 
 

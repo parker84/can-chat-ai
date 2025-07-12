@@ -8,83 +8,8 @@ from random import choice
 st.set_page_config(
     page_title="Canadian AI",
     page_icon="🍁",
+    initial_sidebar_state="collapsed",
 )
-
-# theme = st.selectbox(
-#     "Choose your theme:",
-#     [
-#         "🇨🇦 Canadian",
-#         "🧬 Cyberpunk",
-#         "🍁 Canadian Cyberpunk",
-#         "🍁 Canadian Cyberpunk + Neon Green Text"
-#     ]
-# )
-
-# # Style map
-# theme_styles = {
-#     "🇨🇦 Canadian": {
-#         "primary": "#D32F2F",
-#         "background": "#0D1117",
-#         "secondary": "#1E222A",
-#         "text": "#F5F5F5",
-#         "font": "sans-serif"
-#     },
-#     "🧬 Cyberpunk": {
-#         "primary": "#00f5ff",
-#         "background": "#0f0f1a",
-#         "secondary": "#1f1f2e",
-#         "text": "#00ff99",
-#         "font": "monospace"
-#     },
-#     "🍁 Canadian Cyberpunk": {
-#         "primary": "#ff3131",
-#         "background": "#0f0f1a",
-#         "secondary": "#1f1f2e",
-#         "text": "#ffffff",
-#         "font": "monospace"
-#     },
-#     "🍁 Canadian Cyberpunk + Neon Green Text": {
-#         "primary": "#ff3131",
-#         "background": "#0f0f1a",
-#         "secondary": "#1f1f2e",
-#         "text": "#00ff99",
-#         "font": "monospace"
-#     },
-# }
-
-# # Apply selected theme
-# style = theme_styles[theme]
-# st.markdown(f"""
-#     <style>
-#         .stApp {{
-#             background-color: {style['background']};
-#             color: {style['text']};
-#             font-family: {style['font']};
-#         }}
-#         .markdown-text-container, .stMarkdown, .stText, .stTextInput, .stTextInput input, .stTextInput div {{
-#             color: {style['text']} !important;
-#         }}
-#         h1, h2, h3, h4, h5, h6 {{
-#             color: {style['text']};
-#         }}
-#         .stButton>button {{
-#             background-color: {style['primary']};
-#             color: white;
-#             border-radius: 0.5rem;
-#             border: none;
-#             padding: 0.5rem 1rem;
-#             box-shadow: 0 0 10px {style['primary']};
-#         }}
-#         .stTextInput>div>div>input {{
-#             background-color: {style['secondary']};
-#             color: {style['text']};
-#             border: 1px solid {style['primary']};
-#         }}
-#         label, .css-1cpxqw2 {{
-#             color: {style['text']} !important;
-#         }}
-#     </style>
-# """, unsafe_allow_html=True)
 
 # Initialize session state for chat history
 if "messages" not in st.session_state:

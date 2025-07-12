@@ -1,8 +1,8 @@
 
 [theme]
-base="dark"
-primaryColor="#ff3131"               # Maple-leaf red (for buttons, links, accents)
-backgroundColor="#0f0f1a"            # Cyberpunk black-blue background
-secondaryBackgroundColor="#1f1f2e"   # Slight contrast for cards/containers
-textColor="#00ff99"                  # Neon green (for all text elements)
-font="monospace"                     # Futuristic/console feel
+base="light"
+primaryColor="#ff3131"               # Bold maple red
+backgroundColor="#fafcfe"            # Almost white, cool and clean (like snow in sunlight ❄️)
+secondaryBackgroundColor="#edf1f7"   # Very soft contrast — clean but not flat
+textColor="#111111"                  # Strong contrast, not harsh
+font="monospace"                     # Still keeping the hacker/synth feel
