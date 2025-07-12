@@ -90,9 +90,9 @@ st.set_page_config(
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-def parse_stream(stream):
+def parse_stream(stream: Iterator[RunResponse]):
     for chunk in stream:
-        if chunk.content is not None:
+        if hasattr(chunk, "event") and chunk.event == 'TeamRunResponseContent':
             yield chunk.content
 
 # TODO: add sidebar with chat history
@@ -137,24 +137,12 @@ if prompt := st.chat_input(
         with st.spinner("Thinking..."):
             agent_team = get_agent_team()
             
-            # stream: Iterator[RunResponse] = agent_team.run(
-            #     prompt, 
-            #     stream=True, 
-            #     auto_invoke_tools=True,
-            #     user_id="ava",
-            # )
-            # full_response = st.write_stream(parse_stream(stream))
-            response = agent_team.run(
+            stream: Iterator[RunResponse] = agent_team.run(
                 prompt, 
-                stream=False, 
+                stream=True, 
                 auto_invoke_tools=True,
                 user_id="ava",
             )
-            # import ipdb; ipdb.set_trace()
-            # st.text(response)
-            st.write(response.content)
-            # full_response = st.write_stream(parse_stream(stream))
-            # full_response = st.write_stream(parse_stream(stream))
+            full_response = st.write_stream(parse_stream(stream))
 
-
-        st.session_state.messages.append({"role": "assistant", "content": response.content})
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
