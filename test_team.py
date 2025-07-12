@@ -51,105 +51,283 @@ Q_AND_A = [
     {
         "question": "help me find some new yoga pants",
         "answer": dedent("""
-      Here are some of the best yoga pants options, with a focus on Canadian products and Canadian-owned brands where possible:              
-                                                                                                                                             
-      ---                                                                                                                                    
-                                                                                                                                             
-      ## 1. Lululemon Align High Rise Leggings                                                                                               
-      - **Brand:** Lululemon (Iconic Canadian brand, Vancouver-based)                                                                        
-      - **Price:** About $112 CAD (list price on Amazon)                                                                                     
-      - **Rating:** 4.5/5 overall from multiple reviewers                                                                                    
-      - **Reviews:** Highly praised for comfort, excellent stretch, breathability, and a sleek fit that supports yoga practice seamlessly.   
-      Reviewers note it stays in place well without squeezing too tightly.                                                                   
-      - **Features:**                                                                                                                        
-        - 4-way stretch fabric (81% nylon, 19% Lycra elastane)                                                                               
-        - Moisture wicking and breathable                                                                                                    
-        - Lightweight and soft "naked sensation" fabric                                                                                      
-        - Hidden waistband pocket                                                                                                            
-        - Sizes 0-20                                                                                                                         
-      - **Made in Canada:** Yes, Lululemon is a Canadian company, though manufacturing is global.                                            
-                                                                                                                                             
-      **Link:** [Lululemon Align High Rise](https://www.lululemon.com)                                                                       
-                                                                                                                                             
-      ---                                                                                                                                    
-                                                                                                                                             
-      ## 2. Daub + Design Two-Tone Yoga Pants                                                                                                
-      - **Brand:** Daub + Design (Vancouver-based Canadian brand)                                                                            
-      - **Price:** Varies (Sold on their website)                                                                                            
-      - **Rating:** Positive reviews emphasizing stylish prints and sustainable comfy fabric                                                 
-      - **Reviews:** Known for unique prints and softness, ideal for both activewear and everyday comfort.                                   
-      - **Features:**                                                                                                                        
-        - Sustainable fabrics                                                                                                                
-        - Unique prints and two-tone designs                                                                                                 
-        - Sizes XS to XL                                                                                                                     
-        - Focus on comfort and versatile style                                                                                               
-      - **Made in Canada:** Designed and based in Canada, local manufacturing details on their site.                                         
-                                                                                                                                             
-      **Link:** [Daub + Design](https://daubanddesign.com) (Please verify latest for yoga pants)                                             
-                                                                                                                                             
-      ---                                                                                                                                    
-                                                                                                                                             
-      ## 3. Azur High-Waisted Yoga Pants                                                                                                     
-      - **Brand:** Azur (Canadian brand focused on inclusive sizing)                                                                         
-      - **Price:** Varies, typically mid-range                                                                                               
-      - **Rating:** Well-reviewed for flattering fit and inclusive sizing up to 18                                                           
-      - **Reviews:** Customers love the comfort and flattering shapes designed for curves; good for yoga and activewear.                     
-      - **Features:**                                                                                                                        
-        - High-waisted design                                                                                                                
-        - Sizes 0-18 for bottoms                                                                                                             
-        - Colorful options like lavender and eggplant                                                                                        
-        - Focused on fit for all body types                                                                                                  
-      - **Made in Canada:** Canadian designed with operations in Canada.                                                                     
-                                                                                                                                             
-      **Link:** [Azur](https://azurfit.com)                                                                                                  
-                                                                                                                                             
-      ---                                                                                                                                    
-                                                                                                                                             
-      ## 4. Beyond Yoga Spacedye Out Of Pocket High Waisted Midi                                                                             
-      - **Brand:** Beyond Yoga (American brand, but well loved in Canada with wide availability)                                             
-      - **Price:** Approx. $69 – $99 USD (~$90 – $130 CAD depending on retailer)                                                             
-      - **Rating:** 4/5 from users and reviewers                                                                                             
-      - **Reviews:** Very soft and comfortable leggings ideal for yoga, casual wear, and travel. Excellent tummy control, flattering fit, and
-      useful side pockets.                                                                                                                   
-      - **Features:**                                                                                                                        
-        - 87% polyester, 13% spandex                                                                                                         
-        - Moisture-wicking, 4-way stretch                                                                                                    
-        - UV Protection                                                                                                                      
-        - Hip pockets                                                                                                                        
-        - Sizes XXS-4X                                                                                                                       
-      - **Made in Canada:** No (American brand), but widely available in Canada.                                                             
-                                                                                                                                             
-      **Link:** [Beyond Yoga](https://beyondyoga.com)                                                                                        
-                                                                                                                                             
-      ---                                                                                                                                    
-                                                                                                                                             
-      ## 5. Titika Active Couture (Toronto-Based Brand)                                                                                      
-      - **Brand:** Titika (Canadian-owned, Toronto-based)                                                                                    
-      - **Price:** Mid-range to higher end, depending on styles                                                                              
-      - **Rating:** Positive reviews for fit and flexible, stylish activewear                                                                
-      - **Reviews:** Known for stylish, fun designs with local roots and emphasis on quality and fit.                                        
-      - **Features:**                                                                                                                        
-        - Activewear pieces, including yoga pants and leggings                                                                               
-        - Flexible production with some local control                                                                                        
-        - Varied designs, some with built-in bras or lace accents                                                                            
-      - **Made in Canada:** Designed in Toronto, production partly local.                                                                    
-                                                                                                                                             
-      **Link:** [Titika](https://titikacture.com)                                                                                            
-                                                                                                                                             
-      ---                                                                                                                                    
-                                                                                                                                             
-      ## Summary Recommendation:                                                                                                             
-                                                                                                                                             
-      - For iconic, trusted quality and Canadian roots: **Lululemon Align High Rise** (top pick, though pricier)                             
-      - For unique, Canadian designed, and sustainable: **Daub + Design**                                                                    
-      - For inclusive sizing and flattering fit: **Azur**                                                                                    
-      - For very soft casual and yoga wear: **Beyond Yoga Spacedye** (widely available in Canada but not Canadian-made)                      
-      - For Toronto-based flexible activewear: **Titika**                                                                                    
-                                                                                                                                             
-      ---                                                                                                                                    
-                                                                                                                                             
-      If you would like, I can also focus search on more budget-friendly options, plus-size sizes, or specific Canadian regions like Toronto,
-      Vancouver, or Quebec. Would you like me to? 
+Here are some top Canadian and Canadian-loved yoga pants options carefully selected for quality, comfort, and style, including iconic        
+      Canadian brands and highly rated Canadian-owned businesses:                                                                                  
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 1. Lululemon Align High Rise Leggings                                                                                                     
+      *Price:* \$112                                                                                                                               
+      *Rating:* 4.8/5 (based on thousands of reviews)                                                                                              
+      *Description:* These leggings are a beloved classic from Vancouver-based Lululemon, designed with buttery-soft Nulu fabric that feels like a 
+      second skin. They offer excellent four-way stretch, breathability, and a comfortable high-rise waistband that stays put without squeezing.   
+      Great for yoga and everyday wear.                                                                                                            
+      *Features:* Moisture-wicking, sweat-resistant, hidden waistband pocket, h-shaped gusset for mobility                                         
+      [Buy directly from Lululemon Canada](https://shop.lululemon.com/p/women-pant/Align-Pant-High-Rise/_/prod9740016)                             
+                                                                                                                                                   
+      **Canadian ownership:** Lululemon is a Canadian company, headquartered in Vancouver, BC, and a global leader in yoga and activewear.         
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 2. Beyond Yoga Spacedye Out of Pocket High Waisted Midi Legging                                                                           
+      *Price:* \$97                                                                                                                                
+      *Rating:* 4.5/5                                                                                                                              
+      *Description:* Known for dreamy softness and exceptional comfort, Beyond Yoga's Canadian-designed leggings feature flattering high-rise fit  
+      and convenient hip pockets. The fabric blends polyester and spandex to offer breathability with a lounge-worthy feel. Perfect for yoga and   
+      casual comfort.                                                                                                                              
+      *Features:* High-rise waistband, moisture-wicking, UV protection, hip pockets, sizes XXS-4XL                                                 
+      [Buy from Beyond Yoga](https://beyondyoga.com/products/spacedye-out-of-pocket-midi)                                                          
+                                                                                                                                                   
+      **Canadian ownership:** Beyond Yoga was founded in the US but has substantial Canadian market presence. (Note: They are not headquartered in 
+      Canada.)                                                                                                                                     
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 3. Daub + Design Yoga Leggings (Two-tone & Prints)                                                                                        
+      *Price:* Approximately \$120 (varies by style)                                                                                               
+      *Rating:* 4.6/5                                                                                                                              
+      *Description:* Based in Vancouver, Daub + Design offers yoga leggings with unique prints and sustainable, super-soft fabrics that are both   
+      stylish and functional. Great for those who want to break away from plain leggings. Durable and comfortable for yoga and everyday.           
+      *Features:* Sustainable fabrics, custom textile designs, high stretch with secure waistbands                                                 
+      [Shop Daub + Design](https://daubanddesign.com)                                                                                              
+                                                                                                                                                   
+      **Canadian ownership:** Daub + Design is a Canadian-owned and operated activewear company based in Vancouver.                                
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 4. Titika Active Couture Yoga Pants                                                                                                       
+      *Price:* \$85 - \$130 (varies on style)                                                                                                      
+      *Rating:* 4.4/5                                                                                                                              
+      *Description:* Toronto-based Titika offers fashionable, flattering yoga pants with innovative details like built-in bras, lace trims, and    
+      fresh designs updated regularly. Manufactured with strict quality control, these pants are made for comfort and style.                       
+      *Features:* Stretchy, stylish cuts, made in controlled Asian factories, variety of unique prints and styles                                  
+      [Shop Titika](https://titika.com)                                                                                                            
+                                                                                                                                                   
+      **Canadian ownership:** Titika is a Canadian-owned business founded in Toronto.                                                              
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 5. Michi Power Leggings                                                                                                                   
+      *Price:* Approx. \$150                                                                                                                       
+      *Rating:* 4.5/5                                                                                                                              
+      *Description:* Based in Toronto, Michi offers luxe, fashion-forward athletic leggings with intricate lace and mesh details alongside top     
+      performance fabrics. Their leggings are perfect for those who want to blend yoga with edgy style.                                            
+      *Features:* Designer details, moisture-wicking, flattering cuts, made ethically in Canada                                                    
+      [Shop Michi](https://michiactive.com)                                                                                                        
+                                                                                                                                                   
+      **Canadian ownership:** Michi is a Toronto-based Canadian company focused on local manufacturing.                                            
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 6. Seed Athletic Pants (Sustainable Line)                                                                                                 
+      *Price:* Approx. \$135                                                                                                                       
+      *Rating:* 4.3/5                                                                                                                              
+      *Description:* Calgary-based Seed uses mainly hemp and organic cotton fabrics with plant-based dyes. The pants are eco-friendly, sustainable,
+      and designed with natural fibres for softness and function.                                                                                  
+      *Features:* Organic fabrics, plant-based dyes, sustainable production, sizes 00-24                                                           
+      [Seed on their official site](https://seedathletics.com)                                                                                     
+                                                                                                                                                   
+      **Canadian ownership:** Seed is a Canadian-owned sustainable clothing company based in Calgary, Alberta.                                     
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 7. Respecterre Yoga Pants                                                                                                                 
+      *Price:* From \$90 ($CAD)                                                                                                                    
+      *Rating:* 4.5/5                                                                                                                              
+      *Description:* Quebec-based Respecterre makes sustainably produced yoga apparel in eco-villages with a focus on minimal waste and local      
+      manufacturing. Their leggings are comfortable and eco-conscious for mindful yogis.                                                           
+      *Features:* Made to order, OEKO-TEX certified fabrics, plastic-free packaging options                                                        
+      [Shop Respecterre](https://respecterre.eco/en)                                                                                               
+                                                                                                                                                   
+      **Canadian ownership:** Respecterre is Canadian, based in Quebec, committed to local eco-friendly production.                                
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## 8. Old Navy High-Waisted PowerSoft 7/8 Leggings (Budget-Friendly Canadian Option)                                                         
+      *Price:* Starting at \$40                                                                                                                    
+      *Rating:* 4.4/5                                                                                                                              
+      *Description:* Popular for providing good stretch and support at an affordable price, these leggings are great for yoga novices or casual    
+      use. Lightweight and comfortable, they feature a high waistband that stays in place.                                                         
+      *Features:* 77% polyester, 23% elastane, supportive waistband, various colors                                                                
+      [Buy from Old Navy Canada](https://oldnavy.gapcanada.ca)                                                                                     
+                                                                                                                                                   
+      **Canadian ownership:** Old Navy is a US-based company but widely available and popular in Canada.                                           
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## Product Comparison Table                                                                                                                  
+                                                                                                                                                   
+      | Brand                   | Price (CAD) | Rating | Material                    | Features                                       | Canadian   
+      Owned/Made                      |                                                                                                            
+      |-------------------------|-------------|--------|-----------------------------|------------------------------------------------|------------
+      -----------------------------|                                                                                                               
+      | Lululemon Align High Rise| \$112       | 4.8    | 81% nylon, 19% Lycra        | Moisture wicking, 4-way stretch, hidden pocket | Canadian  
+      owned, Vancouver-based         |                                                                                                             
+      | Beyond Yoga Spacedye    | \$97        | 4.5    | 87% polyester, 13% spandex  | UV protection, hip pockets, soft stretchy      | Not        
+      Canadian owned, strong Canadian presence |                                                                                                   
+      | Daub + Design           | ~\$120      | 4.6    | Sustainable fabric blends   | Unique prints, sustainable, comfortable         | Canadian  
+      owned, Vancouver               |                                                                                                             
+      | Titika Active Couture   | \$85-$130   | 4.4    | Mix (produced in Canada & Asia) | Fashionable, built-in bras, quality control     |       
+      Canadian owned, Toronto                 |                                                                                                    
+      | Michi                   | ~\$150      | 4.5    | High-quality, designer fabric | Lace & mesh details, local production          | Canadian 
+      owned, Toronto                 |                                                                                                             
+      | Seed                    | ~\$135      | 4.3    | Hemp, organic cotton         | Plant dyes, sustainable production             | Canadian  
+      owned, Calgary                 |                                                                                                             
+      | Respecterre             | From \$90   | 4.5    | OEKO-TEX certified fabrics  | Made to order, eco-friendly                      | Canadian 
+      owned, Quebec                  |                                                                                                             
+      | Old Navy PowerSoft 7/8  | From \$40   | 4.4    | Polyester/elastane          | High-waisted, budget-friendly                    | Not      
+      Canadian owned                     |                                                                                                         
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### Summary of Canadian Ownership and Local Production:                                                                                      
+                                                                                                                                                   
+      - **Lululemon, Daub + Design, Titika, Michi, Seed, Respecterre**: Canadian owned and operated businesses, with Canadian-based manufacturing  
+      or design.                                                                                                                                   
+      - **Beyond Yoga**: Popular in Canada but US-owned.                                                                                           
+      - **Old Navy**: US brand but very popular and accessible for Canadian shoppers.                                                              
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      If you'd like, I can help find yoga pants that are specifically made or sold locally in a region like Toronto, Vancouver, or Quebec. Would   
+      you prefer that? 
+        """),
+    },
+    {
+        "question": "help me find my next car (suv)",
+        "answer": dedent("""
+            Here are the best SUVs made in Canada in 2025, ranked and detailed with relevant information from Canadian sources and expert reviews:       
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 1. 2025 Honda CR-V                                                                                                                       
+      **Description:** The Honda CR-V is one of the top-selling compact SUVs, known for reliability, fuel efficiency, and spacious interiors.      
+      **Price:** Starting at \$31,495                                                                                                              
+      **Rating:** 10/10 (Car and Driver)                                                                                                           
+      **Reviews:** Highly rated for comfort, fuel economy (28-30 MPG combined), and smooth handling.                                               
+      **Features:** Gas and hybrid powertrain options, advanced safety features, infotainment system with Apple CarPlay and Android Auto, roomy    
+      cargo space.                                                                                                                                 
+      **Made in Canada Details:**                                                                                                                  
+      - Assembled at Honda of Canada Manufacturing, Alliston, Ontario.                                                                             
+      - Canada produces both gas and hybrid versions here.                                                                                         
+      - 214,095 units produced in 2024.                                                                                                            
+      - Large percentage for US and Canadian markets.                                                                                              
+      [Source - Cam Clark Ford](https://www.camclarkfordrichmond.com/blog/what-cars-made-in-canada​/)                                               
+      [Source - Driving.ca](https://driving.ca/car-culture/lists/canadian-made-car-models-built-assembly-tariff)                                   
+      [Source - Car and Driver](https://www.caranddriver.com/rankings/best-suvs)                                                                   
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 2. 2025 Toyota RAV4                                                                                                                      
+      **Description:** Canada’s best-selling SUV, popular for its reliability, hybrid option, and strong resale value.                             
+      **Price:** Starting at \$33,685                                                                                                              
+      **Rating:** 3.8/5 (Driving.ca user rating)                                                                                                   
+      **Reviews:** Praised for solid build quality, fuel efficiency in hybrid, and an overall package fit for families.                            
+      **Features:** Gas and hybrid models, AWD options, Toyota Safety Sense, large cargo hold.                                                     
+      **Made in Canada Details:**                                                                                                                  
+      - Assembled at Toyota Motor Manufacturing Canada, Cambridge and Woodstock, Ontario.                                                          
+      - Most-produced vehicle in Canada in 2024 with 368,577 units.                                                                                
+      - Plug-in hybrid imported from Japan, but gas/hybrid SUVs are local.                                                                         
+      [Source - AutoTrader](https://www.autotrader.ca/editorial/20250403/made-in-canada-what-cars-are-manufactured-in-canada)                      
+      [Source - Driving.ca](https://driving.ca/car-culture/lists/canadian-made-car-models-built-assembly-tariff)                                   
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 3. 2024 Chrysler Pacifica                                                                                                                
+      **Description:** A family-friendly minivan with strong safety scores and modern technology, available in gas and plug-in hybrid versions.    
+      **Price:** Around \$43,000+ (varies by trim)                                                                                                 
+      **Rating:** Appreciated for versatility and comfort (user rating ~3.8/5)                                                                     
+      **Reviews:** Praised for smooth ride, spacious interior, and plug-in capability.                                                             
+      **Features:** Hybrid and gas powertrains, Uconnect infotainment, advanced driver assists.                                                    
+      **Made in Canada Details:**                                                                                                                  
+      - Assembled at Stellantis Windsor Assembly, Windsor, Ontario.                                                                                
+      - 107,668 units produced in 2024.                                                                                                            
+      - The only Stellantis minivans assembled globally here.                                                                                      
+      [Source - Driving.ca](https://driving.ca/car-culture/lists/canadian-made-car-models-built-assembly-tariff)                                   
+      [Source - Cam Clark Ford](https://www.camclarkfordrichmond.com/blog/what-cars-made-in-canada​/)                                               
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 4. 2025 Chevrolet Silverado (Pickup but notable)                                                                                         
+      **Description:** Though a pickup truck, one of the most popular light trucks built in Canada and relevant to many SUV buyers who consider    
+      trucks.                                                                                                                                      
+      **Price:** Starting at \$51,855                                                                                                              
+      **Rating:** 3.63/5 (Driving.ca)                                                                                                              
+      **Reviews:** Known for power, towing capacity, and durability.                                                                               
+      **Features:** Multiple engines including V8, towing packages, modern tech options.                                                           
+      **Made in Canada Details:**                                                                                                                  
+      - Assembled at General Motors Oshawa Assembly, Oshawa, Ontario.                                                                              
+      - 152,190 units produced in 2024.                                                                                                            
+      - GM also builds electric delivery vans, BrightDrop, in Ingersoll, Ontario.                                                                  
+      [Source - Driving.ca](https://driving.ca/car-culture/lists/canadian-made-car-models-built-assembly-tariff)                                   
+      [Source - AutoTrader](https://www.autotrader.ca/editorial/20250403/made-in-canada-what-cars-are-manufactured-in-canada)                      
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 5. 2025 Lexus RX                                                                                                                         
+      **Description:** A luxury mid-size SUV assembled in Canada with gas and hybrid options.                                                      
+      **Price:** Starting around \$50,000+ (exact prices vary by trim)                                                                             
+      **Rating:** High customer satisfaction for luxury and smoothness.                                                                            
+      **Reviews:** Praised for refinement, comfortable ride, and feature-rich cabin.                                                               
+      **Features:** Hybrid and gas engines, luxury finishes, Lexus Safety System+.                                                                 
+      **Made in Canada Details:**                                                                                                                  
+      - Assembled at Toyota Motor Manufacturing Cambridge South, Ontario.                                                                          
+      - Approximately 111,220 units produced in 2024 locally.                                                                                      
+      [Source - Driving.ca](https://driving.ca/car-culture/lists/canadian-made-car-models-built-assembly-tariff)                                   
+      [Source - AutoTrader](https://www.autotrader.ca/editorial/20250403/made-in-canada-what-cars-are-manufactured-in-canada)                      
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 6. 2025 Lexus NX                                                                                                                         
+      **Description:** A compact luxury SUV offering gas and hybrid power, assembled in Canada.                                                    
+      **Price:** Starting at around \$42,000                                                                                                       
+      **Rating:** Positive reviews for technology, comfort, and fuel efficiency.                                                                   
+      **Features:** AWD, hybrid options, Lexus safety features.                                                                                    
+      **Made in Canada Details:**                                                                                                                  
+      - Assembled at Toyota Motor Manufacturing Cambridge North, Ontario.                                                                          
+      - 53,787 units produced in Canada in 2024.                                                                                                   
+      [Source - Driving.ca](https://driving.ca/car-culture/lists/canadian-made-car-models-built-assembly-tariff)                                   
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ### 7. 2025 Dodge Charger Daytona EV                                                                                                         
+      **Description:** A Canadian assembled electric 2-door muscle car SUV-coupe crossover variant, showing Canadian innovation and EV production. 
+      **Price:** Starting at around \$45,000 (anticipated)                                                                                         
+      **Rating:** Growing EV market presence, with excellent reviews for performance.                                                              
+      **Features:** Electric powertrain, performance enhancements, modern infotainment.                                                            
+      **Made in Canada Details:**                                                                                                                  
+      - Assembled at Stellantis Windsor Assembly, Windsor, Ontario since mid-2024.                                                                 
+      [Source - Driving.ca](https://driving.ca/car-culture/lists/canadian-made-car-models-built-assembly-tariff)                                   
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      ## Summary Table of Canadian Made SUVs                                                                                                       
+                                                                                                                                                   
+      | Rank | Model                  | Price Start  | Rating        | Key Features                                      | Assembly Location       
+      (Canada)                      |                                                                                                              
+      |-------|-------------------------|--------------|---------------|--------------------------------------------------|------------------------
+      ------------------------|                                                                                                                    
+      | 1     | 2025 Honda CR-V         | \$31,495     | 10/10 (C&D)   | Gas/hybrid, safety, infotainment, cargo space    | Honda Alliston, Ontario
+      |                                                                                                                                            
+      | 2     | 2025 Toyota RAV4        | \$33,685     | 3.8/5 (User)  | Gas/hybrid, AWD, Toyota Safety Sense             | Cambridge & Woodstock, 
+      Ontario                  |                                                                                                                   
+      | 3     | 2024 Chrysler Pacifica  | ~\$43,000+   | ~3.8/5 (User) | Minivan, plug-in hybrid, family features         | Windsor, Ontario       
+      |                                                                                                                                            
+      | 4     | 2025 Chevrolet Silverado| \$51,855     | 3.63/5 (User) | Pickup – multiple engines, towing capacity         | Oshawa, Ontario      
+      |                                                                                                                                            
+      | 5     | 2025 Lexus RX           | ~\$50,000+   | High          | Luxury, hybrid & gas, advanced safety             | Cambridge South,      
+      Ontario                        |                                                                                                             
+      | 6     | 2025 Lexus NX           | ~\$42,000    | Positive      | Compact luxury, hybrid & gas                       | Cambridge North,     
+      Ontario                        |                                                                                                             
+      | 7     | 2025 Dodge Charger Daytona EV | ~\$45,000 (est) | Growing EV market | Electric performance coupe                        | Windsor, 
+      Ontario                                |                                                                                                     
+                                                                                                                                                   
+      ---                                                                                                                                          
+                                                                                                                                                   
+      If you're seeking SUVs made locally in Canada, these are your best options reflecting Canadian manufacturing excellence, from reliable       
+      mainstream to luxury and electric innovations.                                                                                               
+                                                                                                                                                   
+      Let me know if you want more detail on any model or segment!  
         """),
     },
     
