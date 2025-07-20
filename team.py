@@ -23,6 +23,44 @@ ADDITIONAL_CONTEXT = dedent("""
 # TODO: more search results with LLM reranking on top?
 # TODO: switch over to cohere LLM
 
+product_finding_instructions = dedent("""
+    Find and recommend the best Canadian products - that are from Canadian owned and operated businesses.
+    Don't forget to include classic / iconic and well known Canadian brands (when applicable) like: Roots, Lululemon, Canada Goose, Aritzia, Joe Fresh, Red Canoe, etc.
+    Try to find 5-10 options ranked by ratings / your evaluation of the best options.
+                    
+    Here's the tools you have to use:
+    - fetch_url_contents: fetch the contents of a url
+    - search_web: search the web for information
+    - ReasoningTools: use this to reason about the information you find
+                    
+    When searching the web use search queries like:
+    - "Canadian owned <insert product name> companies"
+    - "<insert product name> that are made in Canada"
+    - "Top Canadian <insert product name> brands"
+    But don't just assume every result is a canadian company or product, you need to check the sources and pull out the relevant information from the sources to make sure it's a canadian company or product.
+    You may want to use the ReasoningTools to help you reason about the information you find.
+
+    Only return products / brands that are either:
+    A) Made in Canada or 
+    B) From Canadian owned and operated businesses
+    For any other products / brands -> don't recommend them
+                    
+    In your outputs:
+    - Include product information and links
+    - Always include sources (and link out to them)
+    - But don't just include the sources, pull out the relevant information from the sources
+    - Always include the product name, description, and link
+    - Always include the product price
+    - Always include the product rating
+    - Always include the product reviews
+    - Always include the product features
+    - Include a table at the bottom comparing all the products
+    - At a minimum include price, rating, features, link and Canadian owner / made as columns in the table
+    - Always include a section that explain for each brand / product whether it's canadian owned and or canadian made
+
+    At the end ask the user a meaninful follow up question ex: if they products local to a certain region of Canada (Toronto, Newfoundland, etc.)
+""")
+
 @st.cache_resource
 def get_agent_team():
     product_finder_agent = Agent(
@@ -36,38 +74,7 @@ def get_agent_team():
             search_web, 
             ReasoningTools()
         ],
-        instructions=dedent("""
-            Find and recommend the best Canadian products - that are from Canadian owned and operated businesses.
-            Don't forget to include classic / iconic and well known Canadian brands (when applicable) like: Roots, Lululemon, Canada Goose, Aritzia, Joe Fresh, Red Canoe, etc.
-            Try to find 5-10 options ranked by ratings / your evaluation of the best options.
-                            
-            Here's the tools you have to use:
-            - fetch_url_contents: fetch the contents of a url
-            - search_web: search the web for information
-            - ReasoningTools: use this to reason about the information you find
-                            
-            When searching the web use search queries like:
-            - "Canadian owned <insert product name> companies"
-            - "<insert product name> that are made in Canada"
-            - "Top Canadian <insert product name> brands"
-            But don't just assume every result is a canadian company or product, you need to check the sources and pull out the relevant information from the sources to make sure it's a canadian company or product.
-            You may want to use the ReasoningTools to help you reason about the information you find.
-
-            In your outputs:
-            - Include product information and links
-            - Always include sources (and link out to them)
-            - But don't just include the sources, pull out the relevant information from the sources
-            - Always include the product name, description, and link
-            - Always include the product price
-            - Always include the product rating
-            - Always include the product reviews
-            - Always include the product features
-            - Include a table at the bottom comparing all the products
-            - At a minimum include price, rating, features, link and Canadian owner / made as columns in the table
-            - Always include a section that explain for each brand / product whether it's canadian owned and or canadian made
-        
-            At the end ask the user a meaninful follow up question ex: if they products local to a certain region of Canada (Toronto, Newfoundland, etc.)
-        """),
+        instructions=product_finding_instructions,
         additional_context=ADDITIONAL_CONTEXT,
         show_tool_calls=True,
         debug_mode=DEBUG_MODE,
@@ -80,17 +87,17 @@ def get_agent_team():
         role="Find and recommend umbrellas",
         model=OpenAIChat(id="gpt-4.1-mini"),
         tools=[
-            # fetch_url_contents, 
-            # search_web, 
-            # ReasoningTools()
+            fetch_url_contents, 
+            search_web, 
+            ReasoningTools()
         ],
-        instructions=dedent("""
-            Find and recommend the best Canadian umbrellas
-            Include umbrella information and links
-            Always include sources (and link out to them)
-            But don't just include the sources, pull out the relevant information from the sources
-                            
-            Here's an example of a great response to a specific question:
+        instructions=dedent(f"""
+            Here are general instructions for finding products: 
+            {product_finding_instructions}
+
+            But for umbrellas - here's some specific tips.
+
+            Here's an example of a great response to a specific umbrella-related question:
                             
             Question: I'm looking for a new umbrella
                             
