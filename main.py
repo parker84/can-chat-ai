@@ -3,6 +3,10 @@ from typing import Iterator
 from agno.run.response import RunResponse
 from team import get_agent_team
 from random import choice
+import uuid
+
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())  # Generate new UUID
 
 def add_floating_button():
     # Initialize session state for page refresh counter
@@ -121,7 +125,8 @@ if prompt := st.chat_input(
                 prompt, 
                 stream=True, 
                 auto_invoke_tools=True,
-                user_id="ava",
+                user_id=st.session_state.session_id, # stores memories for the user
+                session_id=st.session_state.session_id, # stores the session history for each user
             )
             full_response = st.write_stream(parse_stream(stream))
 
