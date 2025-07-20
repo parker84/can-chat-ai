@@ -28,6 +28,7 @@ def get_agent_team():
         name="Product Finder Agent",
         role="Find and recommend products",
         # model=Cohere(id="command-a-03-2025"),
+        # model=OpenAIChat(id="gpt-4.1"), # so much better than 4.1-mini for the umbrella question
         model=OpenAIChat(id="gpt-4.1-mini"),
         tools=[
             fetch_url_contents, 
@@ -51,6 +52,99 @@ def get_agent_team():
             "Always include a section that explain for each brand / product whether it's canadian owned and or canadian made",
             "At the end consider asking the user if they products local to a certain region of Canada (ex: Toronto, Newfoundland, etc.)",
         ],
+        additional_context=ADDITIONAL_CONTEXT,
+        show_tool_calls=True,
+        debug_mode=DEBUG_MODE,
+        add_datetime_to_instructions=True,
+        markdown=True,
+    )
+
+    umbrella_finder_agent = Agent(
+        name="Umbrella Finder Agent",
+        role="Find and recommend umbrellas",
+        model=OpenAIChat(id="gpt-4.1-mini"),
+        tools=[
+            # fetch_url_contents, 
+            # search_web, 
+            # ReasoningTools()
+        ],
+        instructions=dedent("""
+            Find and recommend the best Canadian umbrellas
+            Include umbrella information and links
+            Always include sources (and link out to them)
+            But don't just include the sources, pull out the relevant information from the sources
+                            
+            Here's an example of a great response to a specific question:
+                            
+            Question: I'm looking for a new umbrella
+                            
+            Answer:
+            
+      Here are some recommended Canadian umbrella options that are made or assembled in Canada or come from Canadian owned and operated
+      businesses:                                                                                                                      
+                                                                                                                                       
+      1. **Midtown Umbrellas**                                                                                                         
+         - Canadian company designing, assembling, and shipping umbrellas from Canada.                                                 
+         - Product range includes market, cantilever, tilt, and LED patio umbrellas.                                                   
+         - Proudly Canadian with free shipping and returns, and 10-year warranty.                                                      
+         - Website: https://www.midtownumbrellas.ca/                                                                                   
+                                                                                                                                       
+      2. **Vancouver Umbrella Inc.**                                                                                                   
+         - Women-owned, family-run Canadian business since 1932.                                                                       
+         - Design and assembly in British Columbia with emphasis on durable construction, custom branding options, and sustainable     
+      materials.                                                                                                                       
+         - Offers rain, patio, and golf umbrellas.                                                                                     
+         - Website: https://vancouverumbrella.com/                                                                                     
+                                                                                                                                       
+      3. **Cheeky Umbrella**                                                                                                           
+         - Canadian owned and operated based in Vancouver, BC.                                                                         
+         - Manufacture their own exclusive line of umbrellas with focus on quality frames and fabrics.                                 
+         - Offer custom logo printing on umbrellas and patio umbrellas.                                                                
+         - Website: https://cheekyumbrella.com/                                                                                        
+                                                                                                                                       
+      4. **Urban Nature Store**                                                                                                        
+         - Offers designer umbrellas featuring Canadian artist designs and some made in Canada or designed in Canada.                  
+         - Umbrellas with unique artwork, folding design, and modern features.                                                         
+         - Website: https://www.urbannaturestore.ca/collections/umbrellas                                                              
+                                                                                                                                       
+      5. **Barrington Brolly**                                                                                                         
+         - Established in Gibsons, BC since 1995.                                                                                      
+         - Handmade umbrellas and parasols with focus on art and fashion.                                                              
+         - Quality often produced in small batch, boutique style.                                                                      
+         - Website: [Listed on Made in Canada Directory]                                                                               
+                                                                                                                                       
+      6. **My Outdoor Room (Umbrellas approximately 95% made in Canada)**                                                              
+         - Located in Tillsonburg, ON                                                                                                  
+         - Offers umbrellas that are mostly Canadian made.                                                                             
+         - Website: [Listed on Made in Canada Directory]                                                                               
+                                                                                                                                       
+      ---                                                                                                                              
+                                                                                                                                       
+      | Brand / Company       | Price Range           | Rating / Warranty          | Features                                 | Link   
+      | Canadian Owned / Made                  |                                                                                       
+      |----------------------|---------------------|---------------------------|------------------------------------------|------------
+      ----------------------------------|--------------------------------------|                                                       
+      | Midtown Umbrellas     | From CA\$499.99+    | 10-year limited warranty  | Patio & Market umbrellas, Wind resistant |           
+      https://www.midtownumbrellas.ca/             | Designed & assembled in Canada       |                                            
+      | Vancouver Umbrella    | Custom pricing       | Lifetime limited warranty | Custom brand umbrellas, sustainable      |          
+      https://vancouverumbrella.com/                | Designed & assembled in Canada       |                                           
+      | Cheeky Umbrella       | Custom pricing       | 1-year Quality Guarantee  | Custom logo umbrellas, premium frames    |          
+      https://cheekyumbrella.com/                    | Canadian owned & operated            |                                          
+      | Urban Nature Store    | CA\$32.95 - \$41.95  | Not posted                | Artist-designed, folding, auto open/close|          
+      https://www.urbannaturestore.ca/collections/umbrellas | Some designed/made in Canada         |                                   
+      | Barrington Brolly     | Boutique pricing     | Not posted                | Handmade, art and fashion umbrellas      | Made in  
+      Canada Directory listing              | Made in Gibsons, BC                  |                                                   
+      | My Outdoor Room       | Not specified        | Not posted                | 95% Canadian made                        | Made in  
+      Canada Directory listing              | Mostly Canadian made                 |                                                   
+                                                                                                                                       
+      ---                                                                                                                              
+                                                                                                                                       
+      If you desire umbrellas fully or mostly made in Canada, I recommend Midtown Umbrellas, Vancouver Umbrella, and Cheeky Umbrella as
+      the top choices. They offer quality, warranty, and local ownership or manufacture. Urban Nature Store offers beautiful           
+      artist-designed umbrellas with some Canadian design influence.                                                                   
+                                                                                                                                       
+      Let me know if you want details on specific models or other umbrella types!  
+        """),
         additional_context=ADDITIONAL_CONTEXT,
         show_tool_calls=True,
         debug_mode=DEBUG_MODE,
@@ -337,7 +431,8 @@ def get_agent_team():
             book_finder_agent,
             artist_finder_agent,
             gift_finder_agent,
-            car_finder_agent
+            car_finder_agent,
+            umbrella_finder_agent,
         ],
         tools=[
             fetch_url_contents, 
@@ -386,6 +481,18 @@ def get_agent_team():
     )
     return agent_team
 
+def main():
+    team = get_agent_team()
+    print("🤖 Agno CLI Agent is ready. Type 'exit' to quit.")
+    while True:
+        user_input = input("💁‍♀️ You: ")
+        if user_input.strip().lower() == "exit":
+            break
+        response = team.run(user_input)
+        print(f"🤖 Agno: {response.content}")
+
+if __name__ == "__main__":
+    main()
 
 # help me find a gift for my father
 # he's 62, retired, loves travelling, into star wars, hockey (especially the leafs), and he's a bit of a nerd (likes star wars, star trek, space, etc.)

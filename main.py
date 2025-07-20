@@ -24,7 +24,7 @@ def parse_stream(stream: Iterator[RunResponse]):
 
 # App title and description
 st.title("Canadian AI")
-st.caption("Built on Canadian LLMs and is biased to support Canadian businesses, creators, and the Canadian economy 🍁")
+st.caption("AI that is biased to support Canadian businesses and the Canadian economy 🍁")
 
 # Display chat messages
 for message in st.session_state.messages:
