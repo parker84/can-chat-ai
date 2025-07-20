@@ -1,5 +1,6 @@
 import streamlit as st
 from agno.agent import Agent
+import openai
 from agno.models.openai import OpenAIChat
 # from agno.models.cohere import Cohere # TODO: fix this not working now
 from textwrap import dedent
