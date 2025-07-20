@@ -9,6 +9,7 @@ dependencies = [
     "cohere>=5.15.0",
     "coloredlogs>=15.0.1",
     "duckduckgo-search>=8.0.2",
+    "openai>=1.97.0",
     "sqlalchemy>=2.0.41",
 ]
 
