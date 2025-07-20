@@ -4,6 +4,49 @@ from agno.run.response import RunResponse
 from team import get_agent_team
 from random import choice
 
+def add_floating_button():
+    # Use st.markdown with a direct HTML anchor tag for the button instead of JS, for better compatibility.
+    st.markdown(
+        """
+    <style>
+        .coffee-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 100;
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            padding: 0;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .coffee-btn:hover {
+            opacity: 1;
+        }
+        .coffee-btn a {
+            display: block;
+            padding: 10px 20px;
+            color: #666;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 15px;
+            background: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .coffee-btn a:hover {
+            background: #f1f3f4;
+            color: #222;
+        }
+    </style>
+    <div class="coffee-btn">
+        <a href="https://buymeacoffee.com/brydon" target="_blank" rel="noopener noreferrer">Buy me a coffee ☕️</a>
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
+
 # Set page config
 st.set_page_config(
     page_title="Canadian AI",
@@ -44,6 +87,8 @@ def get_placeholder():
         "I'm trying to find some new yoga pants",
         "I'm looking for a new pair of shoes",
     ])
+
+add_floating_button()
 
 if prompt := st.chat_input(
         placeholder=get_placeholder()
