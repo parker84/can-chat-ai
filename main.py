@@ -5,6 +5,13 @@ from team import get_agent_team
 from random import choice
 
 def add_floating_button():
+    # Initialize session state for page refresh counter
+    if "page_refresh_count" not in st.session_state:
+        st.session_state.page_refresh_count = 0
+    
+    # Increment the counter on each page load
+    st.session_state.page_refresh_count += 1
+    
     # Use st.markdown with a direct HTML anchor tag for the button instead of JS, for better compatibility.
     st.markdown(
         """
@@ -20,13 +27,14 @@ def add_floating_button():
             padding: 0;
             opacity: 0.85;
             transition: opacity 0.2s;
+            min-width: 0;
         }
         .coffee-btn:hover {
             opacity: 1;
         }
         .coffee-btn a {
             display: block;
-            padding: 10px 20px;
+            padding: 10px 20px 10px 20px;
             color: #666;
             text-decoration: none;
             font-weight: normal;
@@ -40,8 +48,10 @@ def add_floating_button():
             color: #222;
         }
     </style>
-    <div class="coffee-btn">
-        <a href="https://buymeacoffee.com/brydon" target="_blank" rel="noopener noreferrer">Buy me a coffee ☕️</a>
+    <div class="coffee-btn" id="coffee-btn">
+        <a href="https://buymeacoffee.com/brydon" target="_blank" rel="noopener noreferrer">
+            """ + ("☕️" if st.session_state.page_refresh_count > 1 else "Buy me a coffee ☕️") + """
+        </a>
     </div>
     """,
         unsafe_allow_html=True,
