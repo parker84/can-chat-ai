@@ -74,6 +74,11 @@ dev = [
     { name = "ipdb" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "ipdb" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "agno", specifier = ">=1.5.10" },
@@ -85,6 +90,9 @@ requires-dist = [
     { name = "sqlalchemy", specifier = ">=2.0.41" },
 ]
 provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ipdb", specifier = ">=0.13.13" }]
 
 [[package]]
 name = "certifi"

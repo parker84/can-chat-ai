@@ -18,3 +18,8 @@ dev = [
     "ipdb>=0.13.0",
 ]
 
+[dependency-groups]
+dev = [
+    "ipdb>=0.13.13",
+]
+
