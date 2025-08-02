@@ -12,9 +12,9 @@ from agno.memory.v2.db.sqlite import SqliteMemoryDb
 from agno.memory.v2.memory import Memory
 import os
 
-
+# ------------constants
 DEBUG_MODE = os.getenv("DEBUG_MODE", "True").lower() == "true"
-
+MODEL_ID = "gpt-4.1"
 ADDITIONAL_CONTEXT = dedent("""
     Your outputs will be in markdown format so when using $ for money you need to escape it with a backslash.
     Focus on helping Canadian businesses, artists, creators, and the Canadian economy.
@@ -68,7 +68,7 @@ def get_agent_team():
         role="Find and recommend products",
         # model=Cohere(id="command-a-03-2025"),
         # model=OpenAIChat(id="gpt-4.1"), # so much better than 4.1-mini for the umbrella question
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -85,7 +85,7 @@ def get_agent_team():
     umbrella_finder_agent = Agent(
         name="Umbrella Finder Agent",
         role="Find and recommend umbrellas",
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -179,7 +179,7 @@ def get_agent_team():
         name="Service Finder Agent",
         role="Find and recommend services",
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -207,7 +207,7 @@ def get_agent_team():
         name="Brand Finder Agent",
         role="Find and recommend brands",
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -262,7 +262,7 @@ def get_agent_team():
         name="Movie Finder Agent",
         role="Find and recommend movies",
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -289,7 +289,7 @@ def get_agent_team():
         name="TV Show Finder Agent",
         role="Find and recommend TV shows",
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents,   
             search_web, 
@@ -316,7 +316,7 @@ def get_agent_team():
         name="Book Finder Agent",
         role="Find and recommend books",
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -343,7 +343,7 @@ def get_agent_team():
         name="Artist Finder Agent",
         role="Find and recommend artists",
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -367,7 +367,7 @@ def get_agent_team():
         name="Gift Finder Agent",
         role="Find and recommend gifts",
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         respond_directly=False,
         tools=[
             fetch_url_contents, 
@@ -400,7 +400,7 @@ def get_agent_team():
     car_finder_agent = Agent(
         name="Car Finder Agent",
         role="Find and recommend cars",
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         tools=[
             fetch_url_contents, 
             search_web, 
@@ -434,7 +434,7 @@ def get_agent_team():
     memory = Memory(
         # Use any model for creating memories
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"),
+        model=OpenAIChat(id=MODEL_ID),
         db=SqliteMemoryDb(table_name="user_memories", db_file=db_file),
     )
 
@@ -463,7 +463,7 @@ def get_agent_team():
             ReasoningTools(),
         ],
         # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id="gpt-4.1-mini"), # this does better w yoga pants question
+        model=OpenAIChat(id=MODEL_ID), # this does better w yoga pants question
         instructions=dedent(
             """
             Answer the user's question to the best of your abilities.
