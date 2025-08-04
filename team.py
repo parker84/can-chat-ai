@@ -4,6 +4,7 @@ from agno.models.openai import OpenAIChat
 # from agno.models.cohere import Cohere # TODO: fix this not working now
 from textwrap import dedent
 from agno.storage.postgres import PostgresStorage
+from decouple import config
 from agno.memory.v2.db.postgres import PostgresMemoryDb
 from agno.tools.reasoning import ReasoningTools
 from agno.team.team import Team
@@ -69,7 +70,7 @@ product_finding_instructions = dedent("""
 
 
 # ------------database / storage / setup
-db_url = f"postgresql+psycopg://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['POSTGRES_HOST']}/{os.environ['POSTGRES_DB']}"
+db_url = f"postgresql+psycopg://{config('POSTGRES_USER')}:{config('POSTGRES_PASSWORD')}@{config('POSTGRES_HOST')}/{config('POSTGRES_DB')}"
 
 logger.info("Setting up storage")
 team_storage = PostgresStorage(

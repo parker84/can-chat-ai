@@ -12,6 +12,7 @@ dependencies = [
     "duckduckgo-search>=8.0.2",
     "openai>=1.97.0",
     "psycopg>=3.2.9",
+    "python-decouple>=3.8",
     "sqlalchemy>=2.0.41",
 ]
 
