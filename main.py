@@ -100,7 +100,7 @@ def parse_stream(stream: Iterator[RunResponse]):
 # TODO: add sidebar with chat history
 
 # Handle authentication
-if not st.user.is_logged_in:
+if not hasattr(st, 'user') or not hasattr(st.user, 'is_logged_in') or not st.user.is_logged_in:
     login_screen()
     
     # Show waitlist signup form
@@ -112,7 +112,7 @@ else:
     st.sidebar.button("Log out", on_click=st.logout, type="secondary")
     st.title("Canadian AI")
     st.caption("AI that is biased to support Canadian businesses and the Canadian economy 🍁")
-    st.write(f"Welcome, {st.user.name}! 👋") 
+    st.write(f"Welcome, {st.user.name if hasattr(st, 'user') else 'Guest'}! 👋") 
     st.write("How can I help you today?")
 
 # Display chat messages
