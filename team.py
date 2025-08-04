@@ -1,20 +1,26 @@
 import streamlit as st
 from agno.agent import Agent
-import openai
 from agno.models.openai import OpenAIChat
 # from agno.models.cohere import Cohere # TODO: fix this not working now
 from textwrap import dedent
-from agno.storage.sqlite import SqliteStorage
+from agno.storage.postgres import PostgresStorage
+from agno.memory.v2.db.postgres import PostgresMemoryDb
 from agno.tools.reasoning import ReasoningTools
 from agno.team.team import Team
 from tools import fetch_url_contents, search_web
-from agno.memory.v2.db.sqlite import SqliteMemoryDb
 from agno.memory.v2.memory import Memory
 import os
+import coloredlogs, logging
+
+# Create a logger object.
+logger = logging.getLogger(__name__)
+coloredlogs.install(level='INFO', logger=logger)
+
 
 # ------------constants
 DEBUG_MODE = os.getenv("DEBUG_MODE", "True").lower() == "true"
 MODEL_ID = "gpt-4.1"
+TEMPERATURE = 0.0
 ADDITIONAL_CONTEXT = dedent("""
     Your outputs will be in markdown format so when using $ for money you need to escape it with a backslash.
     Focus on helping Canadian businesses, artists, creators, and the Canadian economy.
@@ -60,6 +66,27 @@ product_finding_instructions = dedent("""
 
     At the end ask the user a meaninful follow up question ex: if they products local to a certain region of Canada (Toronto, Newfoundland, etc.)
 """)
+
+
+# ------------database / storage / setup
+db_url = f"postgresql+psycopg://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['POSTGRES_HOST']}/{os.environ['POSTGRES_DB']}"
+
+logger.info("Setting up storage")
+team_storage = PostgresStorage(
+    table_name="chats_team", 
+    db_url=db_url, 
+    auto_upgrade_schema=True, 
+    mode="team"
+)
+logger.info("Storage setup complete ✅")
+
+logger.info("Setting up memory")
+memory = Memory(
+    model=OpenAIChat(id=MODEL_ID, temperature=TEMPERATURE),
+    db=PostgresMemoryDb(table_name="memories", db_url=db_url),
+    debug_mode=DEBUG_MODE,
+)
+logger.info("Memory setup complete ✅")
 
 @st.cache_resource
 def get_agent_team():
@@ -427,17 +454,6 @@ def get_agent_team():
         markdown=True,
     )
 
-    # Database file for memory and storage
-    db_file = "tmp/agent.db"
-
-    # Initialize memory.v2
-    memory = Memory(
-        # Use any model for creating memories
-        # model=Cohere(id="command-a-03-2025"),
-        model=OpenAIChat(id=MODEL_ID),
-        db=SqliteMemoryDb(table_name="user_memories", db_file=db_file),
-    )
-
     agent_team = Team(
         name="Canadian AI",
         # description="A team of AI agents that can help you accomplish a number of things that are biased towards supporting Canadian businesses, artists, creators, and the Canadian economy.",
@@ -494,7 +510,7 @@ def get_agent_team():
         # ----------memory----------
         # adding previous 5 questions and answers to the prompt
         # read more here: https://docs.agno.com/memory/introduction
-        storage=SqliteStorage(table_name="agent_sessions", db_file=db_file),
+        storage=team_storage,
         enable_team_history=True,
         num_history_runs=5,
         # adding agentic memory: "With Agentic Memory, The Agent itself creates, updates and deletes memories from user conversations."
