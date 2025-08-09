@@ -99,6 +99,8 @@ def parse_stream(stream: Iterator[RunResponse]):
 
 # TODO: add sidebar with chat history
 
+# TODO: clean up the login (seems to be really slow?)
+# TODO: fix the bugs in the login process really janky
 # Handle authentication
 if not hasattr(st, 'user') or not hasattr(st.user, 'is_logged_in') or not st.user.is_logged_in:
     login_screen()
@@ -109,38 +111,17 @@ if not hasattr(st, 'user') or not hasattr(st.user, 'is_logged_in') or not st.use
     st.write("[Join the waitlist 📬](https://stan.store/brydon/p/canadian-ai-waitlist-)")
 else:
     # Show the main app interface
-    st.sidebar.button("Log out", on_click=st.logout, type="secondary")
+    # Sidebar content
+    with st.sidebar:
+        st.link_button("📧 Contact Us", "mailto:parkerbrydon@gmail.com")
+        st.markdown("---")  # Add a divider
+        st.button("Log out", on_click=st.logout, type="secondary")
+    
+    # Main content
     st.title("Canadian AI")
     st.caption("AI that is biased to support Canadian businesses and the Canadian economy 🍁")
     st.write(f"Welcome, {st.user.name if hasattr(st, 'user') else 'Guest'}! 👋") 
     st.write("How can I help you today?")
-
-# Display chat messages
-for message in st.session_state.messages:
-    with st.chat_message(message["role"], avatar="🍁" if message["role"] == "assistant" else "💁‍♀️"):
-        st.markdown(message["content"])
-
-@st.cache_data
-def get_placeholder():
-    return choice([
-        "Help me find a gift for my father",
-        "I want to find some new music",
-        "I'm in the market for a pair of jeans",
-        "I want to find a new movie to watch",
-        "What book should I read next?",
-        "What's the top tv show to watch right now?",
-        "I need a new car",
-        "I'm trying to find some new yoga pants",
-        "I'm looking for a new pair of shoes",
-    ])
-
-# add_floating_button(
-#     link="https://buymeacoffee.com/brydon",
-#     emoji="☕️",
-#     text="Buy me a coffee",
-#     position={"bottom": "40px", "right": "40px"},
-#     colors={"background": "#f8f9fa", "text": "#666", "text_hover": "#222", "background_hover": "#f1f3f4"}
-# )
 
 add_floating_button(
     link="https://forms.gle/LNdMMnniVND7qTRq8",
@@ -150,30 +131,59 @@ add_floating_button(
     colors={"background": "#f8f9fa", "text": "#666", "text_hover": "#222", "background_hover": "#f1f3f4"}
 )
 
-if prompt := st.chat_input(
-        placeholder=get_placeholder()
-    ):
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    
-    # Display user message
-    with st.chat_message("user", avatar="💁‍♀️"):
-        st.markdown(prompt)
-    
-    # Display assistant response
-    with st.chat_message("assistant", avatar="🍁"):
-        message_placeholder = st.empty()
-        
-        with st.spinner("Thinking..."):
-            agent_team = get_agent_team()
-            
-            stream: Iterator[RunResponse] = agent_team.run(
-                prompt, 
-                stream=True,
-                auto_invoke_tools=True,
-                user_id=st.user.email, # stores memories for the user
-                session_id=st.session_state.session_id, # stores the session history for each user
-            )
-            full_response = st.write_stream(parse_stream(stream))
+if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in:
 
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
+    # Display chat messages
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"], avatar="🍁" if message["role"] == "assistant" else "💁‍♀️"):
+            st.markdown(message["content"])
+
+    @st.cache_data
+    def get_placeholder():
+        return choice([
+            "Help me find a gift for my father",
+            "I want to find some new music",
+            "I'm in the market for a pair of jeans",
+            "I want to find a new movie to watch",
+            "What book should I read next?",
+            "What's the top tv show to watch right now?",
+            "I need a new car",
+            "I'm trying to find some new yoga pants",
+            "I'm looking for a new pair of shoes",
+        ])
+
+    # add_floating_button(
+    #     link="https://buymeacoffee.com/brydon",
+    #     emoji="☕️",
+    #     text="Buy me a coffee",
+    #     position={"bottom": "40px", "right": "40px"},
+    #     colors={"background": "#f8f9fa", "text": "#666", "text_hover": "#222", "background_hover": "#f1f3f4"}
+    # )
+
+    if prompt := st.chat_input(
+            placeholder=get_placeholder()
+        ):
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        
+        # Display user message
+        with st.chat_message("user", avatar="💁‍♀️"):
+            st.markdown(prompt)
+        
+        # Display assistant response
+        with st.chat_message("assistant", avatar="🍁"):
+            message_placeholder = st.empty()
+            
+            with st.spinner("Thinking..."):
+                agent_team = get_agent_team()
+                
+                stream: Iterator[RunResponse] = agent_team.run(
+                    prompt, 
+                    stream=True,
+                    auto_invoke_tools=True,
+                    user_id=st.user.email, # stores memories for the user
+                    session_id=st.session_state.session_id, # stores the session history for each user
+                )
+                full_response = st.write_stream(parse_stream(stream))
+
+            st.session_state.messages.append({"role": "assistant", "content": full_response})
