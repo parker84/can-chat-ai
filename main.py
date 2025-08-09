@@ -14,7 +14,12 @@ ALLOWED_EMAILS = set(config('ALLOWED_EMAILS').split(','))
 def login_screen():
     st.header("Welcome to Canadian AI 🍁")
     st.markdown("#### Please log in to continue 👇")
-    st.button("🔐 Log in with Google", on_click=st.login, type="primary")
+
+    if st.button("🔐 Log in with Google", type="primary"):
+        st.login("google")  # <-- IMPORTANT: specify provider
+        st.stop()           # stop rendering until redirect completes
+
+    return True if st.user else False
 
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())  # Generate new UUID
