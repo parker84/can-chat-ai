@@ -144,7 +144,7 @@ add_floating_button(
     colors={"background": "#f8f9fa", "text": "#666", "text_hover": "#222", "background_hover": "#f1f3f4"}
 )
 
-if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in:
+if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in and st.user.email in ALLOWED_EMAILS:
 
     # Display chat messages
     for message in st.session_state.messages:
