@@ -11,15 +11,14 @@ from decouple import config
 
 ALLOWED_EMAILS = set(config('ALLOWED_EMAILS').split(','))
 
+
 def login_screen():
     st.header("Welcome to Canadian AI 🍁")
-    st.markdown("#### Please log in to continue 👇")
-
+    st.write("Please log in to continue.")
     if st.button("🔐 Log in with Google", type="primary"):
-        st.login("google")  # <-- IMPORTANT: specify provider
-        st.stop()           # stop rendering until redirect completes
-
-    return True if st.user else False
+        st.login("google")
+        st.stop()  # pause render until OAuth round-trip completes
+    st.stop()      # keep showing login screen until user exists
 
 if "session_id" not in st.session_state:
     st.session_state.session_id = str(uuid.uuid4())  # Generate new UUID
