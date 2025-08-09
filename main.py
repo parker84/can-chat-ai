@@ -4,9 +4,12 @@ from agno.run.response import RunResponse
 from team import get_agent_team
 from random import choice
 import uuid
+from decouple import config
 
-# TODO: investigate why I could login with parkerbrydon@gmail.com?
 # TODO: look into the puremd api key -> do I need to setup a paid account?
+# TODO: fix the login in the cloud -> it's not working
+
+ALLOWED_EMAILS = set(config('ALLOWED_EMAILS').split(','))
 
 def login_screen():
     st.header("Welcome to Canadian AI 🍁")
@@ -88,6 +91,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+with st.sidebar:
+    st.link_button("📧 Contact Us", "mailto:parkerbrydon@gmail.com")
+
 # Initialize session state for chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -97,23 +103,26 @@ def parse_stream(stream: Iterator[RunResponse]):
         if hasattr(chunk, "event") and chunk.event == 'TeamRunResponseContent':
             yield chunk.content
 
-# TODO: add sidebar with chat history
 
-# TODO: clean up the login (seems to be really slow?)
-# TODO: fix the bugs in the login process really janky
-# Handle authentication
+def show_waitlist(show_error: bool = True):
+    """Display the waitlist signup form and message"""
+    st.markdown("---")
+    if show_error:
+        st.warning("🔒 You don't have access to Canadian AI just yet.")
+    st.write("Please join our waitlist to get access!")
+    st.write("[Join the waitlist 📬](https://stan.store/brydon/p/canadian-ai-waitlist-)")
+    st.markdown("---")
+
 if not hasattr(st, 'user') or not hasattr(st.user, 'is_logged_in') or not st.user.is_logged_in:
     login_screen()
-    
-    # Show waitlist signup form
-    st.markdown("---")
-    st.write("Not yet approved for access? Join our waitlist!")
-    st.write("[Join the waitlist 📬](https://stan.store/brydon/p/canadian-ai-waitlist-)")
+    show_waitlist(show_error=False)
+elif st.user.email not in ALLOWED_EMAILS:
+    st.sidebar.button("Log out", on_click=st.logout, type="secondary")
+    show_waitlist(show_error=True)
 else:
     # Show the main app interface
     # Sidebar content
     with st.sidebar:
-        st.link_button("📧 Contact Us", "mailto:parkerbrydon@gmail.com")
         st.markdown("---")  # Add a divider
         st.button("Log out", on_click=st.logout, type="secondary")
     
