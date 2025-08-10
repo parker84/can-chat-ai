@@ -20,7 +20,9 @@ coloredlogs.install(level='INFO', logger=logger)
 
 # ------------constants
 DEBUG_MODE = os.getenv("DEBUG_MODE", "True").lower() == "true"
-MODEL_ID = "gpt-4.1"
+# MODEL_ID = "gpt-4.1-mini" # -> not good enough
+# MODEL_ID = "gpt-4.1" # -> hitting TPM rate limit w pure md
+MODEL_ID = "gpt-5-mini" # -> not working yet w my personal account (having trouble verifying the org)
 TEMPERATURE = 0.0
 ADDITIONAL_CONTEXT = dedent("""
     Your outputs will be in markdown format so when using $ for money you need to escape it with a backslash.
@@ -100,7 +102,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=product_finding_instructions,
         additional_context=ADDITIONAL_CONTEXT,
@@ -117,7 +119,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=dedent(f"""
             Here are general instructions for finding products: 
@@ -211,7 +213,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best Canadian services",
@@ -239,7 +241,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
     ],
         instructions=[
             "Find and recommend the best and most iconic Canadian brands",
@@ -268,7 +270,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best Canadian music",
@@ -294,7 +296,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best Canadian movies",
@@ -321,7 +323,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents,   
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best Canadian TV shows",
@@ -348,7 +350,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best Canadian books",
@@ -375,7 +377,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best Canadian artists",
@@ -400,7 +402,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best Canadian gifts",
@@ -432,7 +434,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools()
+            # ReasoningTools()
         ],
         instructions=[
             "Find and recommend the best cars that are made in Canada",
@@ -477,7 +479,7 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
-            ReasoningTools(),
+            # ReasoningTools(),
         ],
         # model=Cohere(id="command-a-03-2025"),
         model=OpenAIChat(id=MODEL_ID), # this does better w yoga pants question
