@@ -11,6 +11,20 @@ from decouple import config
 
 ALLOWED_EMAILS = set(config('ALLOWED_EMAILS').split(','))
 
+def get_thinking_message() -> str:
+    messages = [
+        "Thinking...",
+        "Searching the web...",
+        "Searching coast to coast... 🍁",
+        "Checking Canadian sources... 🇨🇦",
+        "Exploring local options... 🏠",
+        "Consulting Canadian experts... 👥",
+        "Mapping across provinces... 🗺️",
+        "Brewing up ideas... ☕",
+        "Skating through data... ⛸️",
+        "Searching from sea to sea... 🌊",
+    ]
+    return choice(messages)
 
 def login_screen():
     st.header("Welcome to Canadian AI 🍁")
@@ -187,7 +201,7 @@ if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in and st.user.email i
         with st.chat_message("assistant", avatar="🍁"):
             message_placeholder = st.empty()
             
-            with st.spinner("Thinking..."):
+            with st.spinner(get_thinking_message()):
                 agent_team = get_agent_team()
                 
                 stream: Iterator[RunResponse] = agent_team.run(
