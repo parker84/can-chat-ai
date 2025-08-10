@@ -10,6 +10,7 @@ from decouple import config
 # TODO: fix the login in the cloud -> it's not working
 
 ALLOWED_EMAILS = set(config('ALLOWED_EMAILS').split(','))
+SHOW_TOOL_CALLS = True
 
 def get_thinking_message() -> str:
     messages = [
@@ -120,7 +121,9 @@ def parse_stream(stream: Iterator[RunResponse]):
     for chunk in stream:
         if hasattr(chunk, "event") and chunk.event == 'TeamRunResponseContent':
             yield chunk.content
-
+        if SHOW_TOOL_CALLS and hasattr(chunk, "event") and getattr(chunk, "event", "") in ("ToolCallStarted"):
+            yield f"`Tool call: {chunk.tool.tool_name}, Tool args: {chunk.tool.tool_args}`\n"
+            
 
 def show_waitlist(show_error: bool = True):
     """Display the waitlist signup form and message"""
@@ -210,6 +213,7 @@ if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in and st.user.email i
                     auto_invoke_tools=True,
                     user_id=st.user.email, # stores memories for the user
                     session_id=st.session_state.session_id, # stores the session history for each user
+                    stream_intermediate_steps=True,
                 )
                 full_response = st.write_stream(parse_stream(stream))
 

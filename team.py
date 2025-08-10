@@ -17,6 +17,7 @@ import coloredlogs, logging
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='INFO', logger=logger)
 
+# TODO: handle context windows getting too large
 
 # ------------constants
 DEBUG_MODE = os.getenv("DEBUG_MODE", "True").lower() == "true"
@@ -40,7 +41,6 @@ product_finding_instructions = dedent("""
     Here's the tools you have to use:
     - fetch_url_contents: fetch the contents of a url
     - search_web: search the web for information
-    - ReasoningTools: use this to reason about the information you find
                     
     When searching the web use search queries like:
     - "Canadian owned <insert product name> companies"
@@ -67,6 +67,7 @@ product_finding_instructions = dedent("""
     - At a minimum include price, rating, features, link and Canadian owner / made as columns in the table
     - Always include a section that explain for each brand / product whether it's canadian owned and or canadian made
 
+    Format your response nicely in markdown (ex: headers, bullets, bolding, etc.)
     At the end ask the user a meaninful follow up question ex: if they products local to a certain region of Canada (Toronto, Newfoundland, etc.)
 """)
 
