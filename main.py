@@ -1,9 +1,10 @@
 import streamlit as st
-from typing import Iterator
+from typing import AsyncIterator, AsyncGenerator
 from agno.run.response import RunResponse
 from team import get_agent_team
 from random import choice
 import uuid
+import asyncio
 from decouple import config
 
 # TODO: look into the puremd api key -> do I need to setup a paid account?
@@ -117,12 +118,13 @@ with st.sidebar:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-def parse_stream(stream: Iterator[RunResponse]):
-    for chunk in stream:
-        if hasattr(chunk, "event") and chunk.event == 'TeamRunResponseContent':
-            yield chunk.content
-        if SHOW_TOOL_CALLS and hasattr(chunk, "event") and getattr(chunk, "event", "") in ("ToolCallStarted"):
-            yield f"`Tool call: {chunk.tool.tool_name}, Tool args: {chunk.tool.tool_args}`\n"
+async def parse_stream(stream: AsyncIterator[RunResponse]) -> AsyncGenerator[str, None]:
+    async for chunk in stream:
+        if hasattr(chunk, "event"):
+            if chunk.event == 'TeamRunResponseContent' and chunk.content:
+                yield chunk.content
+            elif SHOW_TOOL_CALLS and chunk.event == "ToolCallStarted":
+                yield f"`Tool call: {chunk.tool.tool_name}, Tool args: {chunk.tool.tool_args}`\n"
             
 
 def show_waitlist(show_error: bool = True):
@@ -190,6 +192,16 @@ if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in and st.user.email i
     #     colors={"background": "#f8f9fa", "text": "#666", "text_hover": "#222", "background_hover": "#f1f3f4"}
     # )
 
+    async def run_agent():
+        return await agent_team.arun(
+            prompt, 
+            stream=True,
+            auto_invoke_tools=True,
+            user_id=st.user.email, # stores memories for the user
+            session_id=st.session_state.session_id, # stores the session history for each user
+            stream_intermediate_steps=True,
+        )
+
     if prompt := st.chat_input(
             placeholder=get_placeholder()
         ):
@@ -207,14 +219,24 @@ if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in and st.user.email i
             with st.spinner(get_thinking_message()):
                 agent_team = get_agent_team()
                 
-                stream: Iterator[RunResponse] = agent_team.run(
-                    prompt, 
-                    stream=True,
-                    auto_invoke_tools=True,
-                    user_id=st.user.email, # stores memories for the user
-                    session_id=st.session_state.session_id, # stores the session history for each user
-                    stream_intermediate_steps=True,
-                )
-                full_response = st.write_stream(parse_stream(stream))
+                # Create and run the async processing
+                async def process_stream():
+                    response_parts = []
+                    stream = await run_agent()
+                    parsed_stream = parse_stream(stream)
+                    
+                    # Use a placeholder for continuous updates
+                    response_placeholder = st.empty()
+                    current_response = ""
+                    
+                    async for content in parsed_stream:
+                        response_parts.append(content)
+                        current_response = "".join(response_parts)
+                        response_placeholder.markdown(current_response)
+                    
+                    return current_response
+                
+                # Run the async process
+                full_response = asyncio.run(process_stream())
 
             st.session_state.messages.append({"role": "assistant", "content": full_response})
