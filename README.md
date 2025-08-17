@@ -1,6 +1,12 @@
 # can-chat-ai
 Repo to build a Canadian focused ai chat solution
 
+## Running locally
+```sh
+export OPENAI_API_KEY=your_openai_api_key
+export PUREMD_API_KEY=your_puremd_api_key
+streamlit run main.py
+```
 
 # TODO
 - [] get latest cohere model working in agno

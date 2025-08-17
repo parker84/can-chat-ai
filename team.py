@@ -8,7 +8,7 @@ from decouple import config
 from agno.memory.v2.db.postgres import PostgresMemoryDb
 from agno.tools.reasoning import ReasoningTools
 from agno.team.team import Team
-from tools import fetch_url_contents, search_web
+from tools import fetch_url_contents, search_web, fetch_urls, search_web_multi
 from agno.memory.v2.memory import Memory
 import os
 import coloredlogs, logging
@@ -41,6 +41,8 @@ product_finding_instructions = dedent("""
     Here's the tools you have to use:
     - fetch_url_contents: fetch the contents of a url
     - search_web: search the web for information
+    - fetch_urls: fetch the contents of a list of urls
+    - search_web_multi: search the web for information in parallel
                     
     When searching the web use search queries like:
     - "Canadian owned <insert product name> companies"
@@ -103,6 +105,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=product_finding_instructions,
@@ -120,6 +124,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=dedent(f"""
@@ -214,6 +220,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=[
@@ -242,6 +250,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
     ],
         instructions=[
@@ -271,6 +281,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=[
@@ -297,6 +309,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=[
@@ -324,7 +338,9 @@ def get_agent_team():
         tools=[
             fetch_url_contents,   
             search_web, 
-            # ReasoningTools()
+            fetch_urls,
+            search_web_multi,
+            # ReasoningTools() # TODO: handle this somehow
         ],
         instructions=[
             "Find and recommend the best Canadian TV shows",
@@ -351,6 +367,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=[
@@ -378,6 +396,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=[
@@ -403,6 +423,8 @@ def get_agent_team():
         tools=[
             fetch_url_contents, 
             search_web, 
+            fetch_urls,
+            search_web_multi,
             # ReasoningTools()
         ],
         instructions=[
