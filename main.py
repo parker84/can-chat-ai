@@ -118,13 +118,13 @@ with st.sidebar:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-async def parse_stream(stream: AsyncIterator[RunResponse]) -> AsyncGenerator[str, None]:
+async def parse_stream(stream: AsyncIterator[RunResponse]) -> AsyncGenerator[tuple[str, str], None]:
     async for chunk in stream:
         if hasattr(chunk, "event"):
             if chunk.event == 'TeamRunResponseContent' and chunk.content:
-                yield chunk.content
+                yield ("content", chunk.content)
             elif SHOW_TOOL_CALLS and chunk.event == "ToolCallStarted":
-                yield f"`Tool call: {chunk.tool.tool_name}, Tool args: {chunk.tool.tool_args}`\n"
+                yield ("tool_call", f"🔧 {chunk.tool.tool_name} - {chunk.tool.tool_args}")  # More concise tool call display
             
 
 def show_waitlist(show_error: bool = True):
@@ -225,14 +225,31 @@ if hasattr(st.user, 'is_logged_in') and st.user.is_logged_in and st.user.email i
                     stream = await run_agent()
                     parsed_stream = parse_stream(stream)
                     
-                    # Use a placeholder for continuous updates
+                    # Use separate placeholders for tool calls and content
+                    tool_call_placeholder = st.empty()
                     response_placeholder = st.empty()
                     current_response = ""
+                    current_tool_call = ""
                     
-                    async for content in parsed_stream:
-                        response_parts.append(content)
-                        current_response = "".join(response_parts)
-                        response_placeholder.markdown(current_response)
+                    async for content_type, content in parsed_stream:
+                        if content_type == "tool_call":
+                            # Show tool call as a temporary caption
+                            current_tool_call = content
+                            tool_call_placeholder.caption(current_tool_call)
+                        elif content_type == "content":
+                            # Clear tool call when regular content arrives
+                            if current_tool_call:
+                                tool_call_placeholder.empty()
+                                current_tool_call = ""
+                            
+                            # Update regular content
+                            response_parts.append(content)
+                            current_response = "".join(response_parts)
+                            response_placeholder.markdown(current_response)
+                    
+                    # Ensure tool call placeholder is cleared at the end
+                    if current_tool_call:
+                        tool_call_placeholder.empty()
                     
                     return current_response
                 
